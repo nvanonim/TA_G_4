@@ -1,6 +1,6 @@
 # SI-Pelatihan
 
-Kelompok G4 - SI-Pelatihan
+**Kelompok G4** - SI-Pelatihan
 
 ## Anggota Kelompok:
 - Alghifari Taufan Nugroho - *1806146846*
