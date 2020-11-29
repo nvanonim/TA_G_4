@@ -32,6 +32,11 @@ public class PesertaServiceImpl implements PesertaService {
                 || peserta.getNo_telepon().length() > 20 || peserta.getNama_peserta().length() > 100) {
             throw new IllegalArgumentException("Input tidak valid");
         }
+        try {
+            Integer.parseInt(peserta.getNo_telepon());
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Nomor telepon harus angka!");
+        }
         return peserta;
     }
 
