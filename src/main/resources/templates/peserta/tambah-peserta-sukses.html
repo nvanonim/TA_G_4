@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sukses!</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <object th:replace="fragments/fragment :: navbar"></object>
+    <div class="container-fluid">
+        <h2 class="mt-3 mb-3 text-center">Sukses menambahkan peserta dengan nama : <span
+                th:text="${peserta.nama_peserta}"></span>!</h2>
+    </div>
+</body>
+
+</html>
