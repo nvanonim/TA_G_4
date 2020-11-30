@@ -23,7 +23,8 @@ public class TrainerModel implements Serializable {
 
     @NotNull
     @Size(max = 16)
-    @Column(name = "no_ktp", nullable = false, unique = true)
+    // @Column(name = "no_ktp", nullable = false, unique = true)
+    @Column(name = "no_ktp", nullable = false, unique = false)
     private String noKtp;
 
     @NotNull

@@ -40,8 +40,4 @@ public class TrainerController {
             return "add-trainer";
         }
     }
-
-    private boolean isTrainerExist(String no_ktp) {
-        return trainerService.getTrainerByNomorKTP(no_ktp).isPresent();
-    }
 }

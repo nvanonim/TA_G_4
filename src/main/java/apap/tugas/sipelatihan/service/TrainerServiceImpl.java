@@ -40,12 +40,7 @@ public class TrainerServiceImpl implements TrainerService {
     public Boolean validateKTP(String noKtp) {
         try {
             TrainerModel temp_trainer = getTrainerByNomorKTP(noKtp);
-            String ktp = temp_trainer.getNoKtp();
-            if (!ktp.isEmpty() && ktp != null) {
-                return true;
-            } else {
-                return false;
-            }
+            return false;
         } catch (NoSuchElementException e) {
             return true;
         }
