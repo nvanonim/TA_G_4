@@ -1,9 +1,5 @@
 package apap.tugas.sipelatihan.model;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -13,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "peserta")
 public class PesertaModel implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,12 +17,12 @@ public class PesertaModel implements Serializable {
     @NotNull
     @Size(max = 100)
     @Column(name = "nama_peserta", nullable = false)
-    private String nama_peserta;
+    private String namaPeserta;
 
     @NotNull
     @Size(max = 20)
     @Column(name = "no_telepon", nullable = false)
-    private String no_telepon;
+    private String noTelepon;
 
     @NotNull
     @Size(max = 100)
@@ -41,7 +37,6 @@ public class PesertaModel implements Serializable {
     @OneToMany(mappedBy = "peserta")
     private List<PesertaPelatihanModel> listPesertaPelatihan;
 
-
     public Long getId() {
         return this.id;
     }
@@ -50,20 +45,20 @@ public class PesertaModel implements Serializable {
         this.id = id;
     }
 
-    public String getNama_peserta() {
-        return this.nama_peserta;
+    public String getNamaPeserta() {
+        return this.namaPeserta;
     }
 
-    public void setNama_peserta(String nama_peserta) {
-        this.nama_peserta = nama_peserta;
+    public void setNamaPeserta(String namaPeserta) {
+        this.namaPeserta = namaPeserta;
     }
 
-    public String getNo_telepon() {
-        return this.no_telepon;
+    public String getNoTelepon() {
+        return this.noTelepon;
     }
 
-    public void setNo_telepon(String no_telepon) {
-        this.no_telepon = no_telepon;
+    public void setNoTelepon(String noTelepon) {
+        this.noTelepon = noTelepon;
     }
 
     public String getAlamat() {
