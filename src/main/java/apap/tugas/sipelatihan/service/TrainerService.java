@@ -7,9 +7,9 @@ import apap.tugas.sipelatihan.model.TrainerModel;
 public interface TrainerService {
     void addTrainer(TrainerModel trainer);
 
-    TrainerModel getTrainerByNomorKTP(String no_ktp);
+    TrainerModel getTrainerByNomorKTP(String noKtp);
 
     List<TrainerModel> getTrainerList();
 
-    Boolean validateKTP(String no_ktp);
+    Boolean validateKTP(String noKtp);
 }

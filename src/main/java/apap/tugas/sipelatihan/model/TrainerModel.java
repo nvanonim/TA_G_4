@@ -17,23 +17,24 @@ import java.util.List;
 public class TrainerModel implements Serializable {
     
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @Size(max = 16)
     @Column(name = "no_ktp", nullable = false, unique = true)
-    private String no_ktp;
+    private String noKtp;
 
     @NotNull
     @Size(max = 200)
     @Column(name = "nama_trainer", nullable = false)
-    private String nama_trainer;
+    private String namaTrainer;
 
     @NotNull
     @Size(max = 200)
     @Column(name = "no_telepon", nullable = false)
-    private String no_telepon;
+    private String noTelepon;
 
     @NotNull
     @Size(max = 100)
@@ -44,7 +45,6 @@ public class TrainerModel implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<PelatihanModel> listPelatihan;
 
-
     public Long getId() {
         return this.id;
     }
@@ -53,28 +53,28 @@ public class TrainerModel implements Serializable {
         this.id = id;
     }
 
-    public String getNo_ktp() {
-        return this.no_ktp;
+    public String getNoKtp() {
+        return this.noKtp;
     }
 
-    public void setNo_ktp(String no_ktp) {
-        this.no_ktp = no_ktp;
+    public void setNoKtp(String noKtp) {
+        this.noKtp = noKtp;
     }
 
-    public String getNama_trainer() {
-        return this.nama_trainer;
+    public String getNamaTrainer() {
+        return this.namaTrainer;
     }
 
-    public void setNama_trainer(String nama_trainer) {
-        this.nama_trainer = nama_trainer;
+    public void setNamaTrainer(String namaTrainer) {
+        this.namaTrainer = namaTrainer;
     }
 
-    public String getNo_telepon() {
-        return this.no_telepon;
+    public String getNoTelepon() {
+        return this.noTelepon;
     }
 
-    public void setNo_telepon(String no_telepon) {
-        this.no_telepon = no_telepon;
+    public void setNoTelepon(String noTelepon) {
+        this.noTelepon = noTelepon;
     }
 
     public String getEmail() {
@@ -92,6 +92,7 @@ public class TrainerModel implements Serializable {
     public void setListPelatihan(List<PelatihanModel> listPelatihan) {
         this.listPelatihan = listPelatihan;
     }
+
 
     public boolean isPresent() {
 		return true;

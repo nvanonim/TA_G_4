@@ -29,8 +29,8 @@ public class TrainerController {
         @ModelAttribute TrainerModel trainer,
         Model model
     ) {
-        String no_ktp = trainer.getNo_ktp();
-        if (isTrainerExist(no_ktp)) {
+        String noKtp = trainer.getNoKtp();
+        if (trainerService.validateKTP(noKtp)) {
             trainerService.addTrainer(trainer);
             model.addAttribute("id", trainer.getId());
             return "add-trainer";
