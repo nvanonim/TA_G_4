@@ -25,7 +25,21 @@ public class TrainerServiceImpl implements TrainerService {
         return trainerDb.findAll();
     }
 
-    
+    @Override
+    public Boolean validateKTP(String no_ktp) {
+        TrainerModel temp_trainer = getTrainerByNomorKTP(no_ktp);
+        String ktp = temp_trainer.getNo_ktp();
+        if (!ktp.isEmpty() && ktp != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public TrainerModel getTrainerByNomorKTP(String no_ktp) {
+        return trainerDb.findByNo_ktp(no_ktp).get();
+    }
     
     
 }
