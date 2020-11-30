@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Peserta</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <object th:replace="fragments/fragment :: navbar"></object>
+    <div class="container-fluid">
+        <h2 class="mt-3 mb-3 text-center">Tambah Peserta</h2>
+        <div class="card mx-auto" style="max-width: 800px;">
+            <div class="card-body">
+                <form th:action="@{/peserta/tambah}" method="post" th:object="${peserta}">
+                    <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" class="form-control" th:field="*{namaPeserta}"
+                            placeholder="Masukkan nama peserta" required />
+                        <small class="form-text error_message" th:if="${#fields.hasErrors('namaPeserta')}" th:errors="*{namaPeserta}"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="noTelepon">Nomor Telepon</label>
+                        <input type="number" class="form-control" th:field="*{noTelepon}"
+                            placeholder="Masukkan nomor telepon peserta" required />
+                        <small class="form-text error_message" th:if="${#fields.hasErrors('noTelepon')}" th:errors="*{noTelepon}"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <input type="text" class="form-control" th:field="*{alamat}"
+                            placeholder="Masukkan alamat peserta" required />
+                        <small class="form-text error_message" th:if="${#fields.hasErrors('alamat')}" th:errors="*{alamat}"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="departemen">Departemen</label>
+                        <select class="form-control" th:field="*{departemen}" required>
+                            <option value="" hidden>--Pilih Departemen--</option>
+                            <option value="HR">Human Resource</option>
+                            <option value="Engineer">Engineer</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Operasional">Operasional</option>
+                        </select>
+                        <small class="form-text error_message" th:if="${#fields.hasErrors('departemen')}" th:errors="*{departemen}"></small>
+                    </div>
+                    <button type="submit" class="btn btn-primary float-right">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
