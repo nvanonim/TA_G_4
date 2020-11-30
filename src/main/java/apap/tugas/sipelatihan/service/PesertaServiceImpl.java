@@ -29,11 +29,11 @@ public class PesertaServiceImpl implements PesertaService {
     @Override
     public PesertaModel inputValidation(PesertaModel peserta) {
         if (peserta.getAlamat().length() > 100 || peserta.getDepartemen().length() > 100
-                || peserta.getNo_telepon().length() > 20 || peserta.getNama_peserta().length() > 100) {
+                || peserta.getNoTelepon().length() > 20 || peserta.getNamaPeserta().length() > 100) {
             throw new IllegalArgumentException("Input tidak valid");
         }
         try {
-            Integer.parseInt(peserta.getNo_telepon());
+            Integer.parseInt(peserta.getNoTelepon());
         } catch (Exception e) {
             throw new IllegalArgumentException("Nomor telepon harus angka!");
         }
