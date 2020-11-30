@@ -92,5 +92,9 @@ public class TrainerModel implements Serializable {
     public void setListPelatihan(List<PelatihanModel> listPelatihan) {
         this.listPelatihan = listPelatihan;
     }
+
+    public boolean isPresent() {
+		return true;
+	}
     
 }
