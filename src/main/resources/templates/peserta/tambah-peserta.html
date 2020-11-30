@@ -18,15 +18,15 @@
                 <form th:action="@{/peserta/tambah}" method="post" th:object="${peserta}">
                     <div class="form-group">
                         <label for="nama">Nama</label>
-                        <input type="text" class="form-control" th:field="*{nama_peserta}"
+                        <input type="text" class="form-control" th:field="*{namaPeserta}"
                             placeholder="Masukkan nama peserta" required />
-                        <small class="form-text error_message" th:if="${#fields.hasErrors('nama_peserta')}" th:errors="*{nama_peserta}"></small>
+                        <small class="form-text error_message" th:if="${#fields.hasErrors('namaPeserta')}" th:errors="*{namaPeserta}"></small>
                     </div>
                     <div class="form-group">
-                        <label for="no_telepon">Nomor Telepon</label>
-                        <input type="number" class="form-control" th:field="*{no_telepon}"
+                        <label for="noTelepon">Nomor Telepon</label>
+                        <input type="number" class="form-control" th:field="*{noTelepon}"
                             placeholder="Masukkan nomor telepon peserta" required />
-                        <small class="form-text error_message" th:if="${#fields.hasErrors('no_telepon')}" th:errors="*{no_telepon}"></small>
+                        <small class="form-text error_message" th:if="${#fields.hasErrors('noTelepon')}" th:errors="*{noTelepon}"></small>
                     </div>
                     <div class="form-group">
                         <label for="alamat">Alamat</label>
