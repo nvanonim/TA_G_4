@@ -87,4 +87,116 @@ public class PelatihanModel implements Serializable {
 
 
 
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNamaPelatihan() {
+        return this.namaPelatihan;
+    }
+
+    public void setNamaPelatihan(String namaPelatihan) {
+        this.namaPelatihan = namaPelatihan;
+    }
+
+    public String getDeskripsi() {
+        return this.deskripsi;
+    }
+
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
+    }
+
+    public Integer getKapasitas() {
+        return this.kapasitas;
+    }
+
+    public void setKapasitas(Integer kapasitas) {
+        this.kapasitas = kapasitas;
+    }
+
+    public Date getTanggalMulai() {
+        return this.tanggalMulai;
+    }
+
+    public void setTanggalMulai(Date tanggalMulai) {
+        this.tanggalMulai = tanggalMulai;
+    }
+
+    public Date getTanggalSelesai() {
+        return this.tanggalSelesai;
+    }
+
+    public void setTanggalSelesai(Date tanggalSelesai) {
+        this.tanggalSelesai = tanggalSelesai;
+    }
+
+    public Date getWaktuMulai() {
+        return this.waktuMulai;
+    }
+
+    public void setWaktuMulai(Date waktuMulai) {
+        this.waktuMulai = waktuMulai;
+    }
+
+    public Date getWaktuSelesai() {
+        return this.waktuSelesai;
+    }
+
+    public void setWaktuSelesai(Date waktuSelesai) {
+        this.waktuSelesai = waktuSelesai;
+    }
+
+    public Integer getStatus_persetujuan() {
+        return this.status_persetujuan;
+    }
+
+    public void setStatus_persetujuan(Integer status_persetujuan) {
+        this.status_persetujuan = status_persetujuan;
+    }
+
+    public TrainerModel getTrainer() {
+        return this.trainer;
+    }
+
+    public void setTrainer(TrainerModel trainer) {
+        this.trainer = trainer;
+    }
+
+    public JenisPelatihanModel getJenisPelatihan() {
+        return this.jenisPelatihan;
+    }
+
+    public void setJenisPelatihan(JenisPelatihanModel jenisPelatihan) {
+        this.jenisPelatihan = jenisPelatihan;
+    }
+
+    public UserModel getPenyetuju() {
+        return this.penyetuju;
+    }
+
+    public void setPenyetuju(UserModel penyetuju) {
+        this.penyetuju = penyetuju;
+    }
+
+    public UserModel getPengaju() {
+        return this.pengaju;
+    }
+
+    public void setPengaju(UserModel pengaju) {
+        this.pengaju = pengaju;
+    }
+
+    public List<PesertaPelatihanModel> getListPesertaPelatihan() {
+        return this.listPesertaPelatihan;
+    }
+
+    public void setListPesertaPelatihan(List<PesertaPelatihanModel> listPesertaPelatihan) {
+        this.listPesertaPelatihan = listPesertaPelatihan;
+    }
+
 }
