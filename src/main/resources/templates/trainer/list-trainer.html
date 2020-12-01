@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Trainer</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-11">
+                <br>
+                <br>
+                <a 
+                    th:href="@{/trainer/add}"
+                    class="btn btn-success"
+                    >+ Tambah Trainer</a
+                >
+                <br><br>
+                <div class="card pilot">
+                    <div class="card-header" id="center">
+                        <h3>Daftar Trainer</h3>
+                    </div>
+                    <div class="card-body">                
+                        <div class="form-row">
+                            <div class="col">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Nomor KTP</th>
+                                            <th>Nomor Telepon</th>
+                                            <th>email</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="trainer, iterationStatus : ${listTrainer}">
+                                            <td th:text="${iterationStatus.count}"></td>
+                                            <td th:text="${trainer.namaTrainer}"></td>
+                                            <td th:text="${trainer.noKtp}"></td>
+                                            <td th:text="${trainer.noTelepon}"></td>
+                                            <td th:text="${trainer.email}"></td>
+                                            <td>
+                                                <a th:href="@{#}" class="btn btn-outline">Ubah</a>
+                                            </td>                                                
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

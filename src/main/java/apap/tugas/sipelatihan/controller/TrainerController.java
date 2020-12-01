@@ -1,5 +1,7 @@
 package apap.tugas.sipelatihan.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -39,5 +41,12 @@ public class TrainerController {
             model.addAttribute("msg", msg);
             return "trainer/add-trainer";
         }
+    }
+
+    @GetMapping("/trainer")
+    public String listTrainer(Model model) {
+        List<TrainerModel> listTrainer = trainerService.getTrainerList();
+        model.addAttribute("listTrainer", listTrainer);
+        return "trainer/list-trainer";
     }
 }
