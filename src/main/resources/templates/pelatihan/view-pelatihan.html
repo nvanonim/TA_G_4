@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Pelatihan</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<!--<nav th:replace="fragments/fragment :: navbar('View Pelatihan')"></nav>-->
+<div class="container-fluid">
+    <br><br>
+    <section class="justify-content-center">
+        <div class="card-group">
+            <div class="card"></div>
+            <div class="card align-content-center justify-content-center" align="center" style="width: 20rem; align-content: center">
+                <div class="card-header">Detail Pelatihan</div>
+                <div class="card-body text-center align-content-center">
+                    <p th:text="'Nama Pelatihan: ' + ${pelatihan.nama_pelatihan}"></p>
+                    <p th:text="'Deskripsi: ' + ${pelatihan.deskripsi}"></p>
+                    <p th:text="'Kapasitas: ' + ${pelatihan.kapasitas}"></p>
+                    <p th:text="'Tanggal Mulai: ' + *{#dates.format(pelatihan.tanggal_mulai, 'dd MMMM yyyy')}"></p>
+                    <p th:text="'Tanggal Selesai: ' +*{#dates.format(pelatihan.tanggal_selesai, 'dd MMMM yyyy')}"></p>
+                    <p th:text="'Waktu Mulai: ' + *{#dates.format(pelatihan.waktu_mulai, 'HH:mm')}"></p>
+                    <p th:text="'Waktu Selesai: ' + *{#dates.format(pelatihan.waktu_selesai, 'HH:mm')}"></p>
+
+                    <p th:if="${pelatihan.status_persetujuan == 2}">Status Persetujuan : Disetujui</p>
+                    <p th:if="${pelatihan.status_persetujuan == 1}">Status Persetujuan : Ditolak</p>
+                    <p th:if="${pelatihan.status_persetujuan == 0}">Status Persetujuan : Menunggu Persetujuan</p>
+
+                    <div>
+                        <a th:href="@{/pelatihan/change/} + ${pelatihan.id}" class="btn btn-success">Change Pelatihan</a>
+                        <a th:href="@{/pelatihan/delete/} + ${pelatihan.id}" class="btn btn-danger">Delete Pelatihan</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card"></div>
+        </div>
+    </section>
+    <br><br>
+    <section>
+        <h3 th:text="${title}"></h3>
+        <table class="table" th:if="${status == true}">
+            <thead>
+            <tr th:if="${status == true}">
+                <th>No</th>
+                <th>Nama</th>
+                <th>No Telepon</th>
+                <th>Alamat</th>
+                <th>Departemen</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="peserta, iterationStatus : ${listPeserta}"
+                th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${peserta.getPeserta().getNamaPeserta()}"></td>
+                <td th:text="${peserta.getPeserta().getNoTelepon()}"></td>
+                <td th:text="${peserta.getPeserta().getAlamat()}"></td>
+                <td th:text="${peserta.getPeserta().getDepartemen()}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+        </form>
+    </section>
+</div>
+</body>
+</html>
