@@ -23,7 +23,7 @@ public class PelatihanModel implements Serializable {
     @NotNull
     @Size(max = 50)
     @Column(name = "nama_pelatihan", nullable = false)
-    private String nama_pelatihan;
+    private String namaPelatihan;
 
     @NotNull
     @Size(max = 200)
@@ -38,25 +38,25 @@ public class PelatihanModel implements Serializable {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "tanggal_mulai", nullable = false)
-    private Date tanggal_mulai;
+    private Date tanggalMulai;
 
     @NotNull
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "tanggal_selesai", nullable = false)
-    private Date tanggal_selesai;
+    private Date tanggalSelesai;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     @Column(name = "waktu_mulai", nullable = false)
-    private Date waktu_mulai;
+    private Date waktuMulai;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     @Column(name = "waktu_selesai", nullable = false)
-    private Date waktu_selesai;
+    private Date waktuSelesai;
 
     @NotNull
     @Column(name = "status_persetujuan")
@@ -85,116 +85,6 @@ public class PelatihanModel implements Serializable {
     @OneToMany(mappedBy = "pelatihan")
     private List<PesertaPelatihanModel> listPesertaPelatihan;
 
-    public Long getId() {
-        return this.id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNama_pelatihan() {
-        return this.nama_pelatihan;
-    }
-
-    public void setNama_pelatihan(String nama_pelatihan) {
-        this.nama_pelatihan = nama_pelatihan;
-    }
-
-    public String getDeskripsi() {
-        return this.deskripsi;
-    }
-
-    public void setDeskripsi(String deskripsi) {
-        this.deskripsi = deskripsi;
-    }
-
-    public Integer getKapasitas() {
-        return this.kapasitas;
-    }
-
-    public void setKapasitas(Integer kapasitas) {
-        this.kapasitas = kapasitas;
-    }
-
-    public Date getTanggal_mulai() {
-        return this.tanggal_mulai;
-    }
-
-    public void setTanggal_mulai(Date tanggal_mulai) {
-        this.tanggal_mulai = tanggal_mulai;
-    }
-
-    public Date getTanggal_selesai() {
-        return this.tanggal_selesai;
-    }
-
-    public void setTanggal_selesai(Date tanggal_selesai) {
-        this.tanggal_selesai = tanggal_selesai;
-    }
-
-    public Date getWaktu_mulai() {
-        return this.waktu_mulai;
-    }
-
-    public void setWaktu_mulai(Date waktu_mulai) {
-        this.waktu_mulai = waktu_mulai;
-    }
-
-    public Date getWaktu_selesai() {
-        return this.waktu_selesai;
-    }
-
-    public void setWaktu_selesai(Date waktu_selesai) {
-        this.waktu_selesai = waktu_selesai;
-    }
-
-    public Integer getStatus_persetujuan() {
-        return this.status_persetujuan;
-    }
-
-    public void setStatus_persetujuan(Integer status_persetujuan) {
-        this.status_persetujuan = status_persetujuan;
-    }
-
-    public TrainerModel getTrainer() {
-        return this.trainer;
-    }
-
-    public void setTrainer(TrainerModel trainer) {
-        this.trainer = trainer;
-    }
-
-    public JenisPelatihanModel getJenisPelatihan() {
-        return this.jenisPelatihan;
-    }
-
-    public void setJenisPelatihan(JenisPelatihanModel jenisPelatihan) {
-        this.jenisPelatihan = jenisPelatihan;
-    }
-
-    public UserModel getPenyetuju() {
-        return this.penyetuju;
-    }
-
-    public void setPenyetuju(UserModel penyetuju) {
-        this.penyetuju = penyetuju;
-    }
-
-    public UserModel getPengaju() {
-        return this.pengaju;
-    }
-
-    public void setPengaju(UserModel pengaju) {
-        this.pengaju = pengaju;
-    }
-
-    public List<PesertaPelatihanModel> getListPesertaPelatihan() {
-        return this.listPesertaPelatihan;
-    }
-
-    public void setListPesertaPelatihan(List<PesertaPelatihanModel> listPesertaPelatihan) {
-        this.listPesertaPelatihan = listPesertaPelatihan;
-    }
 
 }
