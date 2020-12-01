@@ -21,7 +21,7 @@ public class TrainerController {
     public String addTrainerFormPage(Model model) {
         model.addAttribute("trainer", new TrainerModel());
 
-        return "form-add-trainer";
+        return "trainer/form-add-trainer";
     }
 
     @PostMapping("/trainer/add")
@@ -33,11 +33,11 @@ public class TrainerController {
         if (trainerService.validateKTP(noKtp)) {
             trainerService.addTrainer(trainer);
             model.addAttribute("id", trainer.getId());
-            return "add-trainer";
+            return "trainer/add-trainer";
         } else {
             String msg = "Nomor KTP sudah terdaftar di dalam Database";
             model.addAttribute("msg", msg);
-            return "add-trainer";
+            return "trainer/add-trainer";
         }
     }
 }
