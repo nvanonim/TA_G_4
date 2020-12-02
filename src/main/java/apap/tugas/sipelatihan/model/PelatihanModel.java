@@ -23,7 +23,7 @@ public class PelatihanModel implements Serializable {
     @NotNull
     @Size(max = 50)
     @Column(name = "nama_pelatihan", nullable = false)
-    private String nama_pelatihan;
+    private String namaPelatihan;
 
     @NotNull
     @Size(max = 200)
@@ -38,25 +38,25 @@ public class PelatihanModel implements Serializable {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "tanggal_mulai", nullable = false)
-    private Date tanggal_mulai;
+    private Date tanggalMulai;
 
     @NotNull
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "tanggal_selesai", nullable = false)
-    private Date tanggal_selesai;
+    private Date tanggalSelesai;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     @Column(name = "waktu_mulai", nullable = false)
-    private Date waktu_mulai;
+    private Date waktuMulai;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     @Column(name = "waktu_selesai", nullable = false)
-    private Date waktu_selesai;
+    private Date waktuSelesai;
 
     @NotNull
     @Column(name = "status_persetujuan")
@@ -85,6 +85,8 @@ public class PelatihanModel implements Serializable {
     @OneToMany(mappedBy = "pelatihan")
     private List<PesertaPelatihanModel> listPesertaPelatihan;
 
+
+
     public Long getId() {
         return this.id;
     }
@@ -93,12 +95,12 @@ public class PelatihanModel implements Serializable {
         this.id = id;
     }
 
-    public String getNama_pelatihan() {
-        return this.nama_pelatihan;
+    public String getNamaPelatihan() {
+        return this.namaPelatihan;
     }
 
-    public void setNama_pelatihan(String nama_pelatihan) {
-        this.nama_pelatihan = nama_pelatihan;
+    public void setNamaPelatihan(String namaPelatihan) {
+        this.namaPelatihan = namaPelatihan;
     }
 
     public String getDeskripsi() {
@@ -117,36 +119,36 @@ public class PelatihanModel implements Serializable {
         this.kapasitas = kapasitas;
     }
 
-    public Date getTanggal_mulai() {
-        return this.tanggal_mulai;
+    public Date getTanggalMulai() {
+        return this.tanggalMulai;
     }
 
-    public void setTanggal_mulai(Date tanggal_mulai) {
-        this.tanggal_mulai = tanggal_mulai;
+    public void setTanggalMulai(Date tanggalMulai) {
+        this.tanggalMulai = tanggalMulai;
     }
 
-    public Date getTanggal_selesai() {
-        return this.tanggal_selesai;
+    public Date getTanggalSelesai() {
+        return this.tanggalSelesai;
     }
 
-    public void setTanggal_selesai(Date tanggal_selesai) {
-        this.tanggal_selesai = tanggal_selesai;
+    public void setTanggalSelesai(Date tanggalSelesai) {
+        this.tanggalSelesai = tanggalSelesai;
     }
 
-    public Date getWaktu_mulai() {
-        return this.waktu_mulai;
+    public Date getWaktuMulai() {
+        return this.waktuMulai;
     }
 
-    public void setWaktu_mulai(Date waktu_mulai) {
-        this.waktu_mulai = waktu_mulai;
+    public void setWaktuMulai(Date waktuMulai) {
+        this.waktuMulai = waktuMulai;
     }
 
-    public Date getWaktu_selesai() {
-        return this.waktu_selesai;
+    public Date getWaktuSelesai() {
+        return this.waktuSelesai;
     }
 
-    public void setWaktu_selesai(Date waktu_selesai) {
-        this.waktu_selesai = waktu_selesai;
+    public void setWaktuSelesai(Date waktuSelesai) {
+        this.waktuSelesai = waktuSelesai;
     }
 
     public Integer getStatus_persetujuan() {
