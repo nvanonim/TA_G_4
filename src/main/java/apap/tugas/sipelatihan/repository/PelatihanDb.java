@@ -9,5 +9,6 @@ import apap.tugas.sipelatihan.model.PelatihanModel;
 
 @Repository
 public interface PelatihanDb extends JpaRepository<PelatihanModel, Long> {
-    
+    Optional<PelatihanModel> findById(Long Id);
+
 }
