@@ -35,9 +35,11 @@
             <div class="text-secondary font-italic" sec:authorize="isAnonymous()">
                 <a th:href="@{/login}" class="nav-item nav-link active">Login</a>
             </div>
-            <div class="text-secondary font-italic" sec:authorize="isAuthenticated()">
+            <div class="text-secondary font-italic text-info" sec:authorize="isAuthenticated()">
                 <span sec:authentication="name"></span>
-                <a th:href="@{/logout}" class="nav-item nav-link active">Logout</a>
+            </div>
+            <div class="text-secondary font-italic" sec:authorize="isAuthenticated()">
+                <a th:href="@{/logout}" class="nav-item nav-link active text-white">Logout</a>
             </div>
         </div>
     </nav>
