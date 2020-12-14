@@ -23,6 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/user/add").permitAll()
+                .antMatchers("/api/v1/**").permitAll()
                 .antMatchers("/peserta/tambah").hasAnyAuthority("Karyawan")
                 .anyRequest().authenticated()
                 .and()
@@ -31,7 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login").permitAll();
+                .logoutSuccessUrl("/login").permitAll()
+                .and().cors().and().csrf().disable();
     }
 
     @Bean
