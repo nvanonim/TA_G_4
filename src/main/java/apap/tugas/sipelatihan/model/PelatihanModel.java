@@ -36,25 +36,25 @@ public class PelatihanModel implements Serializable {
 
     @NotNull
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "tanggal_mulai", nullable = false)
     private Date tanggal_mulai;
 
     @NotNull
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "tanggal_selesai", nullable = false)
     private Date tanggal_selesai;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "waktu_mulai", nullable = false)
     private Date waktu_mulai;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "waktu_selesai", nullable = false)
     private Date waktu_selesai;
 

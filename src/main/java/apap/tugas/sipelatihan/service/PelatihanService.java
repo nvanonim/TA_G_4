@@ -5,6 +5,8 @@ import java.util.List;
 
 public interface PelatihanService {
     PelatihanModel getPelatihanById(Long id);
+
+    void addPelatihan(PelatihanModel pelatihan);
 }
 
 

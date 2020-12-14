@@ -14,10 +14,13 @@ public class PelatihanServiceImpl implements PelatihanService{
     PelatihanDb pelatihanDb;
 
     @Override
-    public PelatihanModel getPelatihanById(Long id){
-
+    public PelatihanModel getPelatihanById(Long id) {
         return pelatihanDb.findById(id).get();
     }
 
+    @Override
+    public void addPelatihan(PelatihanModel pelatihan) {
+        pelatihanDb.save(pelatihan);
+    }
 
 }
