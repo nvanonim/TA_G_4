@@ -16,6 +16,7 @@ import java.util.List;
 @Table(name = "role")
 public class RoleModel implements Serializable {
     @Id
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
