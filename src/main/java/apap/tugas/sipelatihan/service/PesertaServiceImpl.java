@@ -1,5 +1,6 @@
 package apap.tugas.sipelatihan.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,14 +40,20 @@ public class PesertaServiceImpl implements PesertaService {
         if (peserta.size() + target.getListPesertaPelatihan().size() > target.getKapasitas()) {
             throw new Exception("Melebihi kapasitas");
         }
+
+        List<PesertaPelatihanModel> tambah = new ArrayList<>();
         for (PesertaPelatihanModel pesertaPelatihanModel : peserta) {
+            if (pesertaPelatihanDb.findByPelatihanAndPeserta(target, pesertaPelatihanModel.getPeserta()).size() > 0) {
+                continue;
+            }
             pesertaPelatihanModel.setPelatihan(target);
             pesertaPelatihanModel.setNoPeserta(target.getId() + "-"
                     + pesertaPelatihanModel.getPeserta().getDepartemen().toUpperCase().substring(0, 2) + "-"
                     + pesertaPelatihanModel.getPeserta().getId());
             pesertaPelatihanDb.save(pesertaPelatihanModel);
+            tambah.add(pesertaPelatihanModel);
         }
-        return target.getListPesertaPelatihan();
+        return tambah;
     }
 
     @Override
