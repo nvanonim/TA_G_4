@@ -8,9 +8,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import apap.tugas.sipelatihan.model.PesertaPelatihanModel;
+import apap.tugas.sipelatihan.restservice.PesertaPelatihanRestService;
 import apap.tugas.sipelatihan.model.PelatihanModel;
 import apap.tugas.sipelatihan.restservice.PelatihanRestService;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -18,6 +22,9 @@ public class PelatihanRestController {
 
     @Autowired
     private PelatihanRestService pelatihanRestService;
+
+    @Autowired
+    private PesertaPelatihanRestService pesertaPelatihanRestService;
     
     @PostMapping("/pelatihan")
     private PelatihanModel createPelatihan(@Valid @RequestBody PelatihanModel pelatihan,
@@ -32,4 +39,5 @@ public class PelatihanRestController {
             return pelatihanRestService.createPelatihan(pelatihan);
         }
     }
+
 }
