@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "pelatihan")
 public class PelatihanModel implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,7 +23,7 @@ public class PelatihanModel implements Serializable {
     @NotNull
     @Size(max = 50)
     @Column(name = "nama_pelatihan", nullable = false)
-    private String nama_pelatihan;
+    private String namaPelatihan;
 
     @NotNull
     @Size(max = 200)
@@ -85,7 +85,6 @@ public class PelatihanModel implements Serializable {
     @OneToMany(mappedBy = "pelatihan")
     private List<PesertaPelatihanModel> listPesertaPelatihan;
 
-
     public Long getId() {
         return this.id;
     }
@@ -94,12 +93,12 @@ public class PelatihanModel implements Serializable {
         this.id = id;
     }
 
-    public String getNama_pelatihan() {
-        return this.nama_pelatihan;
+    public String getNamaPelatihan() {
+        return this.namaPelatihan;
     }
 
-    public void setNama_pelatihan(String nama_pelatihan) {
-        this.nama_pelatihan = nama_pelatihan;
+    public void setNamaPelatihan(String namaPelatihan) {
+        this.namaPelatihan = namaPelatihan;
     }
 
     public String getDeskripsi() {

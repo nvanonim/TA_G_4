@@ -32,8 +32,7 @@ public class PesertaPelatihanModel implements Serializable {
     @NotNull
     @Size(max = 200)
     @Column(name = "no_peserta", nullable = false)
-    private String no_peserta;
-
+    private String noPeserta;
 
     public Long getId() {
         return this.id;
@@ -59,12 +58,12 @@ public class PesertaPelatihanModel implements Serializable {
         this.pelatihan = pelatihan;
     }
 
-    public String getNo_peserta() {
-        return this.no_peserta;
+    public String getNoPeserta() {
+        return this.noPeserta;
     }
 
-    public void setNo_peserta(String no_peserta) {
-        this.no_peserta = no_peserta;
+    public void setNoPeserta(String no_peserta) {
+        this.noPeserta = no_peserta;
     }
 
 }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Peserta Pelatihan</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <object th:replace="fragments/fragment :: navbar"></object>
+    <section class="container-fluid py-5" style="height: calc(100% - 56px)">
+        <form th:action="@{/pelatihan/} + ${pelatihan.id} + @{/add/peserta}" th:object="${pelatihan}" method="post">
+            <div class="card">
+                <div class="card-header">Tambah Peserta</div>
+                <div class="card-body">
+                    <div th:unless="${error_msg == null}">
+                        <div class="alert alert-danger" role="alert" th:text="${error_msg}">
+
+                        </div>
+                    </div>
+                    <button type="submit" name="add-row" class="btn btn-success">Tambah Row</button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <div th:each="pesertaPelatihan, iter : *{ListPesertaPelatihan}">
+                                <tr>
+                                    <td>
+                                        <select th:field="*{ListPesertaPelatihan[__${iter.index}__].Peserta}"
+                                            class="form-control">
+                                            <option th:each="peserta : ${listPeserta}" th:value="${peserta.id}"
+                                                th:text="${peserta.namaPeserta}"></option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger" type="submit" name="delete-row"
+                                            th:value="${iter.index}">Delete Row</button>
+                                    </td>
+                                </tr>
+                            </div>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </form>
+    </section>
+</body>
+
+</html>
