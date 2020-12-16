@@ -122,6 +122,7 @@ public class PelatihanController {
     }
 
         return "/pelatihan/view-pelatihan";
+    }
 
     @PostMapping(value = "/view/{id}", params = "persetujuan")
     public String viewDetailPelatihanPersetujuan(@PathVariable Long id, @RequestParam("persetujuan") int value,
