@@ -41,7 +41,15 @@ public class PelatihanController {
     private PesertaService pesertaService;
 
     @GetMapping("")
-    public String index() {
+    public String index(Authentication auth, Model model) {
+        UserModel user = userService.getUserByUsername(auth.getName());
+        List<PelatihanModel> listPelatihan;
+        if (user.getRole().getId() == 1 || user.getRole().getId() == 2) {
+            listPelatihan = pelatihanService.getAll();
+        } else {
+            listPelatihan = pelatihanService.getPelatihanFromPengguna(user);
+        }
+        model.addAttribute("listPelatihan", listPelatihan);
         return "pelatihan/index";
     }
 
