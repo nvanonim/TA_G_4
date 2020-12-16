@@ -20,7 +20,7 @@
                     style="width: 20rem; align-content: center">
                     <div class="card-header">Detail Pelatihan</div>
                     <div class="card-body text-center align-content-center">
-                        <p th:text="'Nama Pelatihan: ' + ${pelatihan.nama_pelatihan}"></p>
+                        <p th:text="'Nama Pelatihan: ' + ${pelatihan.namaPelatihan}"></p>
                         <p th:text="'Deskripsi: ' + ${pelatihan.deskripsi}"></p>
                         <p th:text="'Kapasitas: ' + ${pelatihan.kapasitas}"></p>
                         <p th:text="'Tanggal Mulai: ' + *{#dates.format(pelatihan.tanggal_mulai, 'dd MMMM yyyy')}"></p>

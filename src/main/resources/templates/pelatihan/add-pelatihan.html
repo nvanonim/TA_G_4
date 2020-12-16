@@ -26,26 +26,35 @@
                 </div>
                 <form class="text-secondary" th:action="@{/pelatihan/add}" th:object="${pelatihan}" method="POST">
                     Nama Pelatihan<br>
-                    <input class="form-control mb-3 mt-1" type="text" name="nama_pelatihan" th:field="*{nama_pelatihan}" required />
+                    <input class="form-control mb-3 mt-1" type="text" name="namaPelatihan" th:field="*{namaPelatihan}"
+                        required />
                     Deskripsi<br>
-                    <textarea class="form-control mb-3 mt-1" name="deskripsi" th:field="*{deskripsi}" rows="3" required />
+                    <textarea class="form-control mb-3 mt-1" name="deskripsi" th:field="*{deskripsi}" rows="3"
+                        required />
                     Kapasitas<br>
-                    <input class="form-control mb-3 mt-1" type="text" name="kapasitas" th:field="*{kapasitas}" required />
+                    <input class="form-control mb-3 mt-1" type="text" name="kapasitas" th:field="*{kapasitas}"
+                        required />
                     Tanggal Mulai<br>
-                    <input class="form-control mb-3 mt-1" type="date" name="tanggal_mulai" th:field="*{tanggal_mulai}" required />
+                    <input class="form-control mb-3 mt-1" type="date" name="tanggal_mulai" th:field="*{tanggal_mulai}"
+                        required />
                     Tanggal Selesai<br>
-                    <input class="form-control mb-3 mt-1" type="date" name="tanggal_selesai" th:field="*{tanggal_selesai}" required />
+                    <input class="form-control mb-3 mt-1" type="date" name="tanggal_selesai"
+                        th:field="*{tanggal_selesai}" required />
                     Waktu Mulai (hh:mm)<br>
-                    <input class="form-control mb-3 mt-1" type="time" name="waktu_mulai" th:field="*{waktu_mulai}" required />
+                    <input class="form-control mb-3 mt-1" type="time" name="waktu_mulai" th:field="*{waktu_mulai}"
+                        required />
                     Waktu Selesai (hh:mm)<br>
-                    <input class="form-control mb-3 mt-1" type="time" name="waktu_selesai" th:field="*{waktu_selesai}" required />
+                    <input class="form-control mb-3 mt-1" type="time" name="waktu_selesai" th:field="*{waktu_selesai}"
+                        required />
                     Jenis Pelatihan<br>
                     <select class="form-control mb-3 mt-1" name="jenisPelatihan" th:field="*{jenisPelatihan}">
-                        <option th:each="jenis : ${listJenisPelatihan}" th:value="${jenis.id}" th:text="${jenis.nama}"></option>
+                        <option th:each="jenis : ${listJenisPelatihan}" th:value="${jenis.id}" th:text="${jenis.nama}">
+                        </option>
                     </select>
                     Nama Pelatih<br>
                     <select class="form-control mb-3 mt-1" name="trainer" th:field="*{trainer}">
-                        <option th:each="trainer : ${listTrainer}" th:value="${trainer.id}" th:text="${trainer.namaTrainer}"></option>
+                        <option th:each="trainer : ${listTrainer}" th:value="${trainer.id}"
+                            th:text="${trainer.namaTrainer}"></option>
                     </select>
                     <br>
                     <button type="submit" class="btn btn-primary mx-auto">Submit</button>
