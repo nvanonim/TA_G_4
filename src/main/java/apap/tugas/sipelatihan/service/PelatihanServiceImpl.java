@@ -1,15 +1,18 @@
 package apap.tugas.sipelatihan.service;
 
-
 import apap.tugas.sipelatihan.model.PelatihanModel;
+import apap.tugas.sipelatihan.model.UserModel;
 import apap.tugas.sipelatihan.repository.PelatihanDb;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class PelatihanServiceImpl implements PelatihanService{
+public class PelatihanServiceImpl implements PelatihanService {
     @Autowired
     PelatihanDb pelatihanDb;
 
@@ -21,6 +24,16 @@ public class PelatihanServiceImpl implements PelatihanService{
     @Override
     public void addPelatihan(PelatihanModel pelatihan) {
         pelatihanDb.save(pelatihan);
+    }
+
+    @Override
+    public List<PelatihanModel> getAll() {
+        return pelatihanDb.findAll();
+    }
+
+    @Override
+    public List<PelatihanModel> getPelatihanFromPengguna(UserModel user) {
+        return pelatihanDb.findByPengaju(user);
     }
 
 }

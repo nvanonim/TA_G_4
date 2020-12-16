@@ -12,7 +12,8 @@ public interface PesertaService {
 
     public PesertaModel inputValidation(PesertaModel peserta);
 
-    public List<PesertaPelatihanModel> assignManyPesertaToPelatihan(List<PesertaModel> peserta,
-            PelatihanModel pelatihan);
+    public List<PesertaPelatihanModel> assignManyPesertaToPelatihan(List<PesertaPelatihanModel> peserta,
+            PelatihanModel pelatihan) throws Exception;
 
+    public List<PesertaModel> getAllPeserta();
 }
