@@ -115,9 +115,11 @@ public class PelatihanController {
 
     @PostMapping(value = "/view/{id}", params = "persetujuan")
     public String viewDetailPelatihanPersetujuan(@PathVariable Long id, @RequestParam("persetujuan") int value,
-            Model model) {
+            Authentication auth, Model model) {
         PelatihanModel pelatihan = pelatihanService.getPelatihanById(id);
         pelatihan.setStatus_persetujuan(value);
+        UserModel penyetuju = userService.getUserByUsername(auth.getName());
+        pelatihan.setPenyetuju(penyetuju);
         pelatihanService.addPelatihan(pelatihan);
         return "redirect:/pelatihan/view/" + id;
     }
