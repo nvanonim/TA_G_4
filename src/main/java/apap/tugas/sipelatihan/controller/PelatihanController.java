@@ -84,6 +84,7 @@ public class PelatihanController {
                     .assignManyPesertaToPelatihan(pelatihan.getListPesertaPelatihan(), pelatihan);
 
             model.addAttribute("pesertaPelatihan", pesertaPelatihan);
+            model.addAttribute("pelatihan", pelatihan);
         } catch (Exception e) {
             model.addAttribute("error_msg", e.getMessage());
             model.addAttribute("pelatihan", pelatihan);
