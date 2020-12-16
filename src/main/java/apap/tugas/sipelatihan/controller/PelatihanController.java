@@ -111,7 +111,15 @@ public class PelatihanController {
         model.addAttribute("listPeserta", listPeserta);
 
         return "/pelatihan/view-pelatihan";
+    }
 
+    @PostMapping(value = "/view/{id}", params = "persetujuan")
+    public String viewDetailPelatihanPersetujuan(@PathVariable Long id, @RequestParam("persetujuan") int value,
+            Model model) {
+        PelatihanModel pelatihan = pelatihanService.getPelatihanById(id);
+        pelatihan.setStatus_persetujuan(value);
+        pelatihanService.addPelatihan(pelatihan);
+        return "redirect:/pelatihan/view/" + id;
     }
 
     @GetMapping("/add")

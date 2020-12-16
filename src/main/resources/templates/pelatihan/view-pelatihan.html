@@ -33,17 +33,28 @@
                         <p th:if="${pelatihan.status_persetujuan == 1}">Status Persetujuan : Ditolak</p>
                         <p th:if="${pelatihan.status_persetujuan == 0}">Status Persetujuan : Menunggu Persetujuan</p>
 
-                        <div class="">
-                            <a th:href="@{/pelatihan/change/} + ${pelatihan.id}" class="btn btn-success">Change
+                        <div>
+                            <a th:href="@{/pelatihan/change/} + ${pelatihan.id}" class="btn btn-warning">Change
                                 Pelatihan</a>
                             <a th:href="@{/pelatihan/delete/} + ${pelatihan.id}" class="btn btn-danger">Delete
                                 Pelatihan</a>
-                            <a th:unless="${pelatihan.jenisPelatihan.id == 1}"
-                                th:href="@{/pelatihan/} + ${pelatihan.id} + @{/add/peserta}" class="btn btn-info">Tambah
-                                Peserta</a>
-                            <a th:if="${pelatihan.jenisPelatihan.id == 1}"
-                                th:href="@{/pelatihan/} + ${pelatihan.id} + @{/impor}" class="btn btn-info">Impor
-                                Karyawan Baru</a>
+                            <div sec:authorize="hasAnyAuthority('Staff Training', 'Kepala Bagian')">
+                                <a th:unless="${pelatihan.jenisPelatihan.id == 1}"
+                                    th:href="@{/pelatihan/} + ${pelatihan.id} + @{/add/peserta}"
+                                    class="btn btn-info">Tambah
+                                    Peserta</a>
+                                <a th:if="${pelatihan.jenisPelatihan.id == 1}"
+                                    th:href="@{/pelatihan/} + ${pelatihan.id} + @{/impor}" class="btn btn-info">Impor
+                                    Karyawan Baru</a>
+                            </div>
+                            <div sec:authorize="hasAnyAuthority('Kepala Bagian', 'Kepala Departemen HR')">
+                                <form method="post" th:if="${pelatihan.status_persetujuan == 0}">
+                                    <button type="submit" name="persetujuan" value="1" class="btn btn-danger">Tolak
+                                        Pelatihan</button>
+                                    <button type="submit" name="persetujuan" value="2" class="btn btn-success">Setujui
+                                        Pelatihan</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
