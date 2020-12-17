@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import apap.tugas.sipelatihan.rest.BaseResponse;
 
 import apap.tugas.sipelatihan.model.PesertaPelatihanModel;
 import apap.tugas.sipelatihan.restservice.PesertaPelatihanRestService;
@@ -38,26 +39,25 @@ public class PesertaPelatihanRestController {
 
     @GetMapping(value = "/pesertapelatihans/{namaPeserta}")
     private List<Map<String, Object>>retrievePesertaPelatihan(@PathVariable(value = "namaPeserta") String namaPeserta){
-            System.out.println(namaPeserta);
-             return pesertaPelatihanRestService.retrieveListPesertaPelatihan(namaPeserta);
-
+        try {
+            return pesertaPelatihanRestService.retrieveListPesertaPelatihan(namaPeserta);
+        }catch (NoSuchElementException e){
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field"
+                );
+            }
 
     }
 
 
-//    @GetMapping("/pelatihan-bonus")
-//    public String addLaporanFormPage(Model model){
-//        model.addAttribute("laporan", new LaporanDetail());
-//        return "form-add-laporan";
-//    }
-//
     @PostMapping(value="/pelatihan-bonus")
-    private String postLaporan(LaporanDetail laporan){
+    private String postLaporan(@Valid @RequestBody LaporanDetail laporan){
         try{
+
         return laporanRestService.postLaporan(laporan);
     }catch (NoSuchElementException e){
             throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field"
+                    HttpStatus.NOT_FOUND, "Tidak ada peserta"
             );
         }
 
