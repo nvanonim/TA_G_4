@@ -11,28 +11,40 @@
 
 <body>
     <object th:replace="fragments/fragment :: navbar"></object>
-    <div class="container-fluid">
-        <h2 class="mt-3 mb-3 text-center">Tambah Peserta</h2>
-        <div class="card mx-auto" style="max-width: 800px;">
-            <div class="card-body">
-                <form th:action="@{/peserta/tambah}" method="post" th:object="${peserta}">
+    <section class="container-fluid py-5 mb-3" style="height: calc(100% - 56px)">
+        <div class="row-cols-1 h-100 mx-auto justify-content-center align-items-center">
+            <div th:replace="fragments/div :: headVar(title='Add Peserta', col='5')"></div>
+            <div class="col-md-5 col-12 mx-auto p-4 shadow">
+                <!-- <div th:if="${param.errort}" class="text-center mb-2 font-weight-bold">
+                    <span class="text-warning">Tanggal selesai tidak boleh mendahului tanggal mulai</span>
+                </div>
+                <div th:if="${param.errorw}" class="text-center mb-2 font-weight-bold">
+                    <span class="text-warning">Waktu selesai tidak boleh sama atau mendahului waktu mulai</span>
+                </div>
+                <div th:if="${param.success}" class="text-center mb-2 font-weight-bold">
+                    <span class="text-success">Pelatihan berhasil ditambahkan!</span>
+                </div> -->
+                <form class="text-secondary" th:action="@{/peserta/add}" th:object="${peserta}" method="POST">
                     <div class="form-group">
                         <label for="nama">Nama</label>
                         <input type="text" class="form-control" th:field="*{namaPeserta}"
                             placeholder="Masukkan nama peserta" required />
-                        <small class="form-text error_message" th:if="${#fields.hasErrors('namaPeserta')}" th:errors="*{namaPeserta}"></small>
+                        <small class="form-text error_message" th:if="${#fields.hasErrors('namaPeserta')}"
+                            th:errors="*{namaPeserta}"></small>
                     </div>
                     <div class="form-group">
                         <label for="noTelepon">Nomor Telepon</label>
                         <input type="number" class="form-control" th:field="*{noTelepon}"
                             placeholder="Masukkan nomor telepon peserta" required />
-                        <small class="form-text error_message" th:if="${#fields.hasErrors('noTelepon')}" th:errors="*{noTelepon}"></small>
+                        <small class="form-text error_message" th:if="${#fields.hasErrors('noTelepon')}"
+                            th:errors="*{noTelepon}"></small>
                     </div>
                     <div class="form-group">
                         <label for="alamat">Alamat</label>
                         <input type="text" class="form-control" th:field="*{alamat}"
                             placeholder="Masukkan alamat peserta" required />
-                        <small class="form-text error_message" th:if="${#fields.hasErrors('alamat')}" th:errors="*{alamat}"></small>
+                        <small class="form-text error_message" th:if="${#fields.hasErrors('alamat')}"
+                            th:errors="*{alamat}"></small>
                     </div>
                     <div class="form-group">
                         <label for="departemen">Departemen</label>
@@ -44,13 +56,15 @@
                             <option value="Sales">Sales</option>
                             <option value="Operasional">Operasional</option>
                         </select>
-                        <small class="form-text error_message" th:if="${#fields.hasErrors('departemen')}" th:errors="*{departemen}"></small>
+                        <small class="form-text error_message" th:if="${#fields.hasErrors('departemen')}"
+                            th:errors="*{departemen}"></small>
                     </div>
-                    <button type="submit" class="btn btn-primary float-right">Submit</button>
+                    <br>
+                    <button type="submit" class="btn btn-primary mx-auto">Submit</button>
                 </form>
             </div>
         </div>
-    </div>
+    </section>
 </body>
 
 </html>
