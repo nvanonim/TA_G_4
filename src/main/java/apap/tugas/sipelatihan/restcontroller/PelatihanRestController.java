@@ -27,12 +27,11 @@ public class PelatihanRestController {
     @Autowired
     private PelatihanRestService pelatihanRestService;
 
-    @Autowired
     private JenisPelatihanService jenisPelatihanService;
 
     @Autowired
     private TrainerService trainerService;
-    
+
     @PostMapping("/pelatihan")
     private BaseResponse<PelatihanModel> createPelatihan(@Valid @RequestBody PelatihanModel pelatihanModel,
             BindingResult bindingResult,
@@ -64,4 +63,5 @@ public class PelatihanRestController {
             return response;
         }
     }
+
 }
