@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
 public class UserModel implements Serializable {    
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -62,7 +61,7 @@ public class UserModel implements Serializable {
     // private String alamat;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idRole", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private RoleModel role;
