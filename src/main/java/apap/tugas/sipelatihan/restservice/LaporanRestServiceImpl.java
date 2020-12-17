@@ -23,18 +23,13 @@ public class LaporanRestServiceImpl implements LaporanRestService {
     }
 
 
+
     @Override
     public String postLaporan(LaporanDetail laporan) {
-        MultiValueMap<String, Object> data = new LinkedMultiValueMap<>();
-        data.add("username",laporan.getUsername());
-        data.add("jumlahPelatihan",laporan.getJumlahPelatihan());
         return this.webClient.post().uri("/api/v1/pelatihan-bonus")
                 .header("Content-Type", "application/json")
-                .bodyValue(data)
+                .body(Mono.just(laporan), LaporanDetail.class)
                 .retrieve()
                 .bodyToMono(String.class).block();
     }
-
-
-
 }
