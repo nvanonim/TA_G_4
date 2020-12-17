@@ -1,4 +1,4 @@
-package apap.tugas.sipelatihan.restcontroller;
+package apap.tugas.sipelatihan.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,9 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import apap.tugas.sipelatihan.model.UserModel;
 import apap.tugas.sipelatihan.rest.PegawaiDetail;
@@ -30,15 +29,26 @@ public class UserRestController {
     @Autowired
     private UserRestService userRestService;
 
+    @RequestMapping("/")
+    public String home(Model model) {
+        return "home";
+    }
+    
+    @GetMapping("/login")
+    public String login() {
+        return "user/login";
+    }
+
     @GetMapping(value = "/user/add")
     public String addUser(Model model) {
         model.addAttribute("listRole", roleService.findAll());
-        model.addAttribute("user", new UserModel());
+        // model.addAttribute("user", new UserModel());
+        model.addAttribute("pegawai", new PegawaiDetail());
         return "user/add-user";
     }
 
-    @PostMapping(value = "/user/add")
-    public String addUserSubmit(Model model, @ModelAttribute UserModel user) {
+    @RequestMapping(value = "/user/add", method = RequestMethod.POST)
+    public String addUserSubmit(@ModelAttribute UserModel user) {
         String var = user.getPassword();
         System.out.println("====================++++++++++++++" + user.getPassword());
         System.out.println("====================++++++++++++++" + user.getNama());
@@ -56,15 +66,17 @@ public class UserRestController {
 
             ObjectMapper mapper = new ObjectMapper();
             try {
-            String json = mapper.writeValueAsString(pegawai);
-            System.out.println("ResultingJSONstring = " + json);
-            //System.out.println(json);
+                String json = mapper.writeValueAsString(pegawai);
+                System.out.println("ResultingJSONstring = " + json);
+                //System.out.println(json);
             } catch (JsonProcessingException e) {
-            e.printStackTrace();
+                e.printStackTrace();
             }
-
             userRestService.addPegawai(pegawai);
-            userService.addUser(user);          
+            userService.addUser(user);   
+            
+            System.out.println("====================++++++++++++++" + pegawai.getUsername());
+            System.out.println("====================++++++++++++++" + pegawai.getNama());
         }
 
         return "redirect:/login";

@@ -41,7 +41,15 @@ public class PegawaiDetail {
     @JsonProperty("roleId")
     private Long idRole;
 
+    private String password;
 
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getUsername() {
         return this.username;

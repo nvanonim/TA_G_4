@@ -15,7 +15,7 @@
         <div class="row-cols-1 h-100 mx-auto justify-content-center align-items-center">
             <div th:replace="fragments/div :: headVar(title='Add User', col='4')"></div>
             <div class="col-md-4 col-12 mx-auto p-4 shadow">
-                <form th:action="@{/user/add}" th:object="${user}" method="POST">
+                <form th:action="@{/user/add}" th:object="${pegawai}" method="POST">
                     <div class="form-group">
                         <label>Username</label>
                         <input type="text" class="form-control" name="username" />
