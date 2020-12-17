@@ -5,10 +5,8 @@ import javax.validation.Valid;
 import apap.tugas.sipelatihan.rest.LaporanDetail;
 import apap.tugas.sipelatihan.restservice.LaporanRestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,12 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import apap.tugas.sipelatihan.model.PesertaModel;
 import apap.tugas.sipelatihan.service.PesertaService;
-import org.springframework.web.server.ResponseStatusException;
-import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Map;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Controller
@@ -35,14 +29,21 @@ public class PesertaController {
     @Autowired
     LaporanRestService laporanRestService;
 
-    @GetMapping(value = "/tambah")
+    @GetMapping({ "", "/" })
+    public String index(Model model) {
+        List<PesertaModel> pesertas = pesertaService.getAllPeserta();
+        model.addAttribute("pesertas", pesertas);
+        return "peserta/index";
+    }
+
+    @GetMapping(value = "/add")
     public String tambahPesertaForm(Model model) {
         PesertaModel peserta = new PesertaModel();
         model.addAttribute("peserta", peserta);
         return "peserta/tambah-peserta";
     }
 
-    @PostMapping(value = "/tambah")
+    @PostMapping(value = "/add")
     public String tambahPesertaSubmit(@Valid @ModelAttribute("peserta") PesertaModel peserta,
             BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -61,27 +62,23 @@ public class PesertaController {
     }
 
     @GetMapping("/laporan")
-    public String addLaporanFormPage(Model model){
+    public String addLaporanFormPage(Model model) {
         model.addAttribute("laporan", new LaporanDetail());
         return "peserta/form-add-laporan";
     }
 
-    //option 2 fitur 14
-    @PostMapping(value="/laporan")
-    private String postLaporan(@ModelAttribute LaporanDetail laporan, Model model){
+    // option 2 fitur 14
+    @PostMapping(value = "/laporan")
+    private String postLaporan(@ModelAttribute LaporanDetail laporan, Model model) {
         try {
             laporanRestService.postLaporan(laporan);
             model.addAttribute("message", "success");
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             model.addAttribute("message", "error");
         }
 
         return "peserta/add-laporan";
 
     }
-
-
-
-
 
 }
