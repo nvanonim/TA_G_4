@@ -40,7 +40,7 @@ public class PelatihanController {
     @Autowired
     private PesertaService pesertaService;
 
-    @GetMapping("")
+    @GetMapping("/")
     public String index(Authentication auth, Model model) {
         UserModel user = userService.getUserByUsername(auth.getName());
         List<PelatihanModel> listPelatihan;
@@ -118,7 +118,7 @@ public class PelatihanController {
         model.addAttribute("pelatihan", pelatihan);
         model.addAttribute("listPeserta", listPeserta);
 
-        return "/pelatihan/view-pelatihan";
+        return "pelatihan/view-pelatihan";
     }
 
     @PostMapping(value = "/view/{id}", params = "persetujuan")
@@ -144,11 +144,6 @@ public class PelatihanController {
     @PostMapping("/add")
     public String addPelatihanSubmit(@ModelAttribute("pelatihan") PelatihanModel pelatihan, Authentication auth,
             Model model) {
-
-        System.out.println("-------------------------------------------------------------");
-        System.out.println(pelatihan.getWaktu_mulai());
-        System.out.println(pelatihan.getWaktu_selesai());
-        System.out.println("-------------------------------------------------------------");
 
         if (pelatihan.getTanggal_mulai().after(pelatihan.getTanggal_selesai())) {
             return "redirect:/pelatihan/add?errort";
