@@ -13,6 +13,7 @@ import apap.tugas.sipelatihan.restservice.PelatihanRestService;
 import reactor.core.publisher.Mono;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/v1")
 public class PelatihanRestController {
 

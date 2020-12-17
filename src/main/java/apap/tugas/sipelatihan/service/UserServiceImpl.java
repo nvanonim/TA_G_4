@@ -1,5 +1,7 @@
 package apap.tugas.sipelatihan.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import apap.tugas.sipelatihan.model.UserModel;
 import apap.tugas.sipelatihan.repository.UserDb;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDb userDb;
