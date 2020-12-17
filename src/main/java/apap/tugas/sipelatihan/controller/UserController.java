@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -63,6 +64,8 @@ public class UserController {
         model.addAttribute("pegawai", new PegawaiDetail());
         return "user/add-user";
     }
+    
+    @PostMapping("/user/add")
     public String addUserSubmit(@ModelAttribute PegawaiDetail pegawai) {
         if (userService.getUserByUsername(pegawai.getUsername()) == null) {
             UserModel user = new UserModel();

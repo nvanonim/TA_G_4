@@ -40,7 +40,7 @@ public class PelatihanController {
     @Autowired
     private PesertaService pesertaService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String index(Authentication auth, Model model) {
         UserModel user = userService.getUserByUsername(auth.getName());
         List<PelatihanModel> listPelatihan;
