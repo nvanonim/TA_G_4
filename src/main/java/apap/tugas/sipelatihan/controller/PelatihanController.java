@@ -4,6 +4,8 @@ import apap.tugas.sipelatihan.model.PelatihanModel;
 import apap.tugas.sipelatihan.model.PesertaModel;
 import apap.tugas.sipelatihan.model.PesertaPelatihanModel;
 import apap.tugas.sipelatihan.model.UserModel;
+import apap.tugas.sipelatihan.rest.KaryawanBaruResponse;
+import apap.tugas.sipelatihan.restservice.KaryawanService;
 import apap.tugas.sipelatihan.service.UserService;
 import apap.tugas.sipelatihan.service.JenisPelatihanService;
 import apap.tugas.sipelatihan.service.PelatihanService;
@@ -17,6 +19,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +44,10 @@ public class PelatihanController {
     @Autowired
     private PesertaService pesertaService;
 
-    @GetMapping("")
+    @Autowired
+    private KaryawanService karyawanService;
+
+    @GetMapping("/")
     public String index(Authentication auth, Model model) {
         UserModel user = userService.getUserByUsername(auth.getName());
         List<PelatihanModel> listPelatihan;
@@ -100,6 +107,19 @@ public class PelatihanController {
             return "pelatihan/add-peserta-pelatihan";
         }
         return "pelatihan/success-add-peserta";
+    }
+
+    @GetMapping("/{id}/impor")
+    public RedirectView imporKaryawan(@PathVariable Long id, RedirectAttributes rattrs) {
+        PelatihanModel pelatihan = pelatihanService.getPelatihanById(id);
+        try {
+            List<PesertaPelatihanModel> added = karyawanService.imporKaryawanToPelatihan(pelatihan);
+            rattrs.addFlashAttribute("success_msg", "Berhasil mengimpor " + added.size() + " karyawan!");
+        } catch (Exception e) {
+            rattrs.addFlashAttribute("error_msg", "Tidak dapat mengimpor, cek kembali kuota peserta!");
+        }
+        // return "redirect:/pelatihan/view/" + id;
+        return new RedirectView("/pelatihan/view/" + id, true);
     }
 
     @GetMapping("/view/{id}")
