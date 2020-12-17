@@ -40,7 +40,7 @@ public class PelatihanController {
     @Autowired
     private PesertaService pesertaService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String index(Authentication auth, Model model) {
         UserModel user = userService.getUserByUsername(auth.getName());
         List<PelatihanModel> listPelatihan;
@@ -119,9 +119,6 @@ public class PelatihanController {
         model.addAttribute("listPeserta", listPeserta);
 
         return "pelatihan/view-pelatihan";
-    }
-
-        return "/pelatihan/view-pelatihan";
     }
 
     @PostMapping(value = "/view/{id}", params = "persetujuan")
