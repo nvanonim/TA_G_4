@@ -3,6 +3,7 @@ package apap.tugas.sipelatihan.rest;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -12,7 +13,8 @@ import apap.tugas.sipelatihan.model.RoleModel;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PegawaiDetail {
-    // @JsonProperty("idPegawai")
+    @JsonProperty("idPegawai")
+    @JsonIgnore
     private String idPegawai;
 
     @JsonProperty("username")

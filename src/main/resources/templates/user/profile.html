@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <object th:replace="fragments/fragment :: navbar"></object>
+    <section class="container-fluid py-5" style="height: calc(100% - 56px)">
+        <div class="row-cols-1 h-100 mx-auto justify-content-center align-items-center">
+            <div th:if="${message} != null">
+                <div class="card">
+                    <div class="card-header" id="text-center">
+                        <h4>User Profile</h4>
+                    </div>
+                    <div class="card-body">                
+                        <div class="form-row">
+                            <div class="col-5">
+                                <div th:text="'ID'"></div>
+                                <br>
+                                <div th:text="'Username'"></div>
+                                <br>
+                                <div th:text="'Nama'"></div>
+                                <br>
+                                <div th:text="'Nomor Telepon'"></div>
+                                <br>
+                                <div th:text="'Tempat Lahir'"></div>
+                                <br>
+                                <div th:text="'Tanggal Lahir'"></div>
+                                <br>
+                                <div th:text="'Alamat'"></div>
+                                <br>
+                                <div th:text="'Role'"></div>
+                                <br>
+                            </div>
+                            <div class="col">
+                                <div th:text="': ' + ${user.id}"></div>
+                                <br>
+                                <div th:text="': ' + ${user.username}"></div>
+                                <br>
+                                <div th:text="': ' + ${pegawai.nama}"></div>
+                                <br>
+                                <div th:text="': ' + ${pegawai.noTelepon}"></div>
+                                <br>
+                                <div th:text="': ' + ${pegawai.tempatLahir}"></div>
+                                <br>
+                                <div th:text="': ' + ${pegawai.tanggalLahir}"></div>
+                                <br>
+                                <div th:text="': ' + ${pegawai.alamat}"></div>
+                                <br>
+                                <div th:text="': ' + ${user.getRole().getRole()}"></div>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <a th:href="@{#}" class="btn but-success">Ubah</a>
+                        </div>                            
+                    </div>
+                </div>
+            </div>
+            <div th:unless="${message} != null">
+                <div class="card">
+                    <div class="card-header" id="text-center">
+                        <h4>User Profile</h4>
+                    </div>
+                    <div class="card-body">                
+                        <div class="form-row">
+                            <div class="col-5">
+                                <div th:text="'ID'"></div>
+                                <br>
+                                <div th:text="'Username'"></div>
+                                <br>
+                                <div th:text="'Role'"></div>
+                                <br>
+                            </div>
+                            <div class="col">
+                                <div th:text="': ' + ${user.id}"></div>
+                                <br>
+                                <div th:text="': ' + ${user.username}"></div>
+                                <br>
+                                <div th:text="': ' + ${user.getRole().getRole()}"></div>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <a th:href="@{#}" class="btn but-success">Ubah</a>
+                        </div>                            
+                    </div>
+                </div>
+            </div>
+                
+        </div>
+    </section>
+</body>
+
+</html>

@@ -70,15 +70,21 @@ public class UserRestServiceImpl implements UserRestService {
 
     @Override
     public PegawaiDetail getPegawaiByUsername(String username) {
-        PegawaiDetail userGet = this.webClient.get()
+        PegawaiDetail user = this.webClient.get()
                             .uri("/api/v1/pegawai/" + username)
-                            // .body(Mono.just(pegawai), PegawaiDetail.class)
                             .retrieve().bodyToMono(PegawaiDetail.class).block();
-        return userGet;
+        return user;
+    }
+
+    @Override
+    public String getPegawaiString(String username) {
+        return this.webClient.get().uri("/api/v1/pegawai/"+username).retrieve().bodyToMono(String.class).block();
     }
 
     // @Override
-    // public Mono<PegawaiDetail> getPegawai(String username) {
+    // public BaseResponse<PegawaiDetail> getPegawai(String username) {
+    //     BaseResponse<PegawaiDetail> response;
+    //     response = new BaseResponse<>();
     //     return this.webClient.get().uri("/api/v1/pegawai/"+username).retrieve().bodyToMono(PegawaiDetail.class);
     // }
     

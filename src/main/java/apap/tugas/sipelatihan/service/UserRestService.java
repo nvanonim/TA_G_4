@@ -9,4 +9,8 @@ public interface UserRestService {
     PegawaiDetail updatePegawai(PegawaiDetail pegawai);
 
     PegawaiDetail getPegawaiByUsername(String username);
+
+    // Mono<PegawaiDetail> getPegawai(String username);
+
+    String getPegawaiString(String username);
 }
