@@ -1,6 +1,8 @@
 package apap.tugas.sipelatihan.service;
 
+import apap.tugas.sipelatihan.rest.BaseResponse;
 import apap.tugas.sipelatihan.rest.PegawaiDetail;
+import apap.tugas.sipelatihan.rest.UserDetail;
 import reactor.core.publisher.Mono;
 
 public interface UserRestService {
@@ -10,7 +12,7 @@ public interface UserRestService {
 
     PegawaiDetail getPegawaiByUsername(String username);
 
-    // Mono<PegawaiDetail> getPegawai(String username);
+    BaseResponse<UserDetail> getPegawai(String username);
 
     String getPegawaiString(String username);
 }

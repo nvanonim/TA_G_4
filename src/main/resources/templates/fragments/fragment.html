@@ -48,7 +48,7 @@
                 <a th:href="@{/login}" class="nav-item nav-link active">Login</a>
             </div>
             <div class="text-secondary font-italic text-info" sec:authorize="isAuthenticated()">
-                <span sec:authentication="name"></span>
+                <a class="user-profile" th:href="@{/user/profil}" sec:authentication="name"></a>
             </div>
             <div class="text-secondary font-italic" sec:authorize="isAuthenticated()">
                 <a th:href="@{/logout}" class="nav-item nav-link active text-white">Logout</a>

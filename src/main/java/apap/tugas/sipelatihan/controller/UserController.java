@@ -1,8 +1,11 @@
 package apap.tugas.sipelatihan.controller;
 
+import java.security.Principal;
+import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +18,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.web.server.ResponseStatusException;
 
 import apap.tugas.sipelatihan.model.UserModel;
 import apap.tugas.sipelatihan.repository.RoleDb;
+import apap.tugas.sipelatihan.rest.BaseResponse;
 import apap.tugas.sipelatihan.rest.PegawaiDetail;
+import apap.tugas.sipelatihan.rest.UserDetail;
 import apap.tugas.sipelatihan.service.RoleService;
 import apap.tugas.sipelatihan.service.UserRestService;
 import apap.tugas.sipelatihan.service.UserService;
@@ -44,7 +50,7 @@ public class UserController {
     public String home(Model model) {
         return "home";
     }
-    
+
     @GetMapping("/login")
     public String login() {
         return "user/login";
@@ -57,44 +63,7 @@ public class UserController {
         model.addAttribute("pegawai", new PegawaiDetail());
         return "user/add-user";
     }
-
-    // @RequestMapping(value = "/user/add", method = RequestMethod.POST)
-    // public String addUserSubmit(@ModelAttribute UserModel user) {
-    //     String var = user.getPassword();
-    //     System.out.println("====================++++++++++++++" + user.getPassword());
-    //     System.out.println("====================++++++++++++++" + user.getNama());
-    //     if (userService.getUserByUsername(user.getUsername()) == null) {
-    //         PegawaiDetail pegawai = new PegawaiDetail();
-
-    //         // pegawai.setIdPegawai(user.getId());
-    //         pegawai.setUsername(user.getUsername());
-    //         pegawai.setNama(user.getNama());
-    //         pegawai.setNoTelepon(user.getNoTelepon());
-    //         pegawai.setTempatLahir(user.getTempatLahir());
-    //         pegawai.setTanggalLahir(user.getTanggalLahir());
-    //         pegawai.setAlamat(user.getAlamat());
-    //         pegawai.setIdRole(user.getRole().getId());
-
-    //         ObjectMapper mapper = new ObjectMapper();
-    //         try {
-    //             String json = mapper.writeValueAsString(pegawai);
-    //             System.out.println("ResultingJSONstring = " + json);
-    //             //System.out.println(json);
-    //         } catch (JsonProcessingException e) {
-    //             e.printStackTrace();
-    //         }
-    //         userRestService.addPegawai(pegawai);
-    //         userService.addUser(user);   
-            
-    //         System.out.println("====================++++++++++++++" + pegawai.getUsername());
-    //         System.out.println("====================++++++++++++++" + pegawai.getNama());
-    //     }
-
-    //     return "redirect:/login";
-    // }
-
-    // @RequestMapping(value = "/user/add", method = RequestMethod.POST)
-    public String addUserSubmit(@ModelAttribute PegawaiDetail pegawai) {        
+    public String addUserSubmit(@ModelAttribute PegawaiDetail pegawai) {
         if (userService.getUserByUsername(pegawai.getUsername()) == null) {
             UserModel user = new UserModel();
             user.setUsername(pegawai.getUsername());
@@ -102,67 +71,37 @@ public class UserController {
             user.setRole(roleDb.findById(pegawai.getIdRole()).get());
 
             userRestService.addPegawai(pegawai);
-            userService.addUser(user);   
-            System.out.println("====================++++++++++++++" + user.getPassword());
-            System.out.println("====================++++++++++++++" + user.getUsername());
-            System.out.println("====================");
-            System.out.println("====================++++++++++++++" + pegawai.getUsername());
-            System.out.println("====================++++++++++++++" + pegawai.getNama());
+            userService.addUser(user);
         }
-
         return "redirect:/login";
     }
 
-    @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
-    // @GetMapping("/user/{username}")
-    public String userProfile(@PathVariable(value = "username", required = false) String username,
-    Model model
-    ) {
-        // try {
+    @RequestMapping(value = "/user/profil", method = RequestMethod.GET)
+    public String userProfile(
+        Principal principal, 
+        Model model)
+            throws JsonMappingException, JsonProcessingException {
+        String username = principal.getName();
         UserModel user = userService.getUserByUsername(username);
-        PegawaiDetail pegawai = userRestService.getPegawaiByUsername(username);
-        String userGet = userRestService.getPegawaiString(username);
-        System.out.println(userGet);
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            String json = mapper.writeValueAsString(pegawai);
-            System.out.println("ResultingJSONstring = " + json);
-            //System.out.println(json);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        // if (pegawai == null) {
-            model.addAttribute("user", user);
-            model.addAttribute("pegawai", pegawai);
-            return "user/profile";
-        // } else {
-        //     String message = "pegawai tidak ada";
-        //     model.addAttribute("user", user);
-        //     model.addAttribute("message", message);
-        //     return "user/profile";
-        // }
+        try {            
+            BaseResponse<UserDetail> response = userRestService.getPegawai(username);
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(response.getResult());
+            UserDetail userD = new ObjectMapper().readValue(json, UserDetail.class);
+            System.out.println(userD.getIdPegawai());
             
-        // } catch (NoSuchElementException e) {
-        //     UserModel user = userService.getUserByUsername(username);
-        //     // PegawaiDetail pegawai = userRestService.getPegawaiByUsername(username);
-        //     model.addAttribute("user", user);
-        //     // model.addAttribute("pegawai", pegawai);
-        //     return "user/profile";
-        // }
+            System.out.println("ResultingJSONstring = " + json);
+
+            
+            model.addAttribute("user", user);
+            model.addAttribute("pegawai", userD);
+            return "user/profile";
+        } catch (WebClientResponseException e) {
+            e.printStackTrace();
+            model.addAttribute("message", "gkada api");
+            model.addAttribute("user", user);
+            return "user/profile";
+        }
         
     }
-
-    // @GetMapping(value = "/user/{username}")
-    // @ResponseBody
-    // private Mono<PegawaiDetail> retrieveResep(@PathVariable(value = "username", required = false) String username) {
-    //     try {
-    //         return userRestService.getPegawai(username);
-    //         // return userRestService.getPegawaiByUsername(username);
-    //     } catch (NoSuchElementException e) {
-    //         throw new ResponseStatusException(
-    //             HttpStatus.NOT_FOUND, "Resep with Number " + String.valueOf(username) + " not found!"
-    //         );
-    //     }
-        
-    // }
 }

@@ -9,10 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import apap.tugas.sipelatihan.model.RoleModel;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PegawaiDetail {
+public class UserDetail {
     @JsonProperty("idPegawai")
     @JsonIgnore
     private String idPegawai;
@@ -30,8 +28,8 @@ public class PegawaiDetail {
     private String tempatLahir;
 
     @JsonProperty("tanggalLahir")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date tanggalLahir;
 
     @JsonProperty("alamat")
@@ -43,15 +41,12 @@ public class PegawaiDetail {
     @JsonProperty("roleId")
     private Long idRole;
 
-    @JsonIgnore
-    private String password;
-
-    public String getPassword() {
-        return this.password;
+    public String getIdPegawai() {
+        return this.idPegawai;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setIdPegawai(String idPegawai) {
+        this.idPegawai = idPegawai;
     }
 
     public String getUsername() {
@@ -109,6 +104,6 @@ public class PegawaiDetail {
     public void setIdRole(Long idRole) {
         this.idRole = idRole;
     }
-    
 
+    
 }

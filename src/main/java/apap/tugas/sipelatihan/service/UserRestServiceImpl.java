@@ -7,8 +7,10 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import apap.tugas.sipelatihan.rest.BaseResponse;
 import apap.tugas.sipelatihan.rest.PegawaiDetail;
 import apap.tugas.sipelatihan.rest.Setting;
+import apap.tugas.sipelatihan.rest.UserDetail;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -81,11 +83,15 @@ public class UserRestServiceImpl implements UserRestService {
         return this.webClient.get().uri("/api/v1/pegawai/"+username).retrieve().bodyToMono(String.class).block();
     }
 
-    // @Override
-    // public BaseResponse<PegawaiDetail> getPegawai(String username) {
-    //     BaseResponse<PegawaiDetail> response;
-    //     response = new BaseResponse<>();
-    //     return this.webClient.get().uri("/api/v1/pegawai/"+username).retrieve().bodyToMono(PegawaiDetail.class);
-    // }
+    @Override
+    public BaseResponse<UserDetail> getPegawai(String username) {
+        // BaseResponse<PegawaiDetail> response = this.webClient.get().uri("/api/v1/pegawai/"+username).retrieve().bodyToMono(BaseResponse.class).block();
+        // return response;
+        // response = new BaseResponse<>();
+        return this.webClient.get()
+                            .uri("/api/v1/pegawai/"+username)
+                            .retrieve()
+                            .bodyToMono(BaseResponse.class).block();
+    }
     
 }
