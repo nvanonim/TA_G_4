@@ -19,7 +19,7 @@ import apap.tugas.sipelatihan.service.UserService;
 
 @Controller
 // @RequestMapping("/api/v1")
-public class UserRestController {
+public class UserController {
     @Autowired
     private RoleService roleService;
 
