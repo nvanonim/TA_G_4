@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container" id="center">
+            <div class="col">
+                <h1 class="title">Selamat Datang di SI-Pelatihan!</h1>
+                <p class="subtitle">Sistem informasi untuk manajemen pengelolaan pelatihan karyawan</p>
+            </div>                
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center" id="center">
+            <div class="col">
+                <h2 class="fitur"> Daftar Fitur</h2>
+                <br>
+                <div class="row justify-content-center list-fitur">
+                    <div class="list-pilot col-md-3 fix">
+                        <p>List Trainer</p>
+                        <!-- <img th:src="@{/img/pilot-icon.png}"> -->
+                        <a th:href="@{/trainer}" class="btn">
+                            Trainer
+                        </a>
+                    </div>
+                    <div class="list-penerbangan col-md-3 fix">
+                        <p>List Pelatihan</p>
+                        <a th:href="@{/pelatihan}" class="btn">
+                            Pelatihan
+                        </a>
+                    </div>
+                    <div class="cari-pilot col-md-3 fix">
+                        <p>Peserta</p>
+                        <a th:href="@{/peserta/tambah}" class="btn">
+                            Tambah Peserta
+                        </a>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

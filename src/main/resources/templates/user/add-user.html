@@ -15,10 +15,30 @@
         <div class="row-cols-1 h-100 mx-auto justify-content-center align-items-center">
             <div th:replace="fragments/div :: headVar(title='Add User', col='4')"></div>
             <div class="col-md-4 col-12 mx-auto p-4 shadow">
-                <form th:action="@{/user/add}" method="POST">
+                <form th:action="@{/user/add}" th:object="${pegawai}" method="POST">
                     <div class="form-group">
                         <label>Username</label>
                         <input type="text" class="form-control" name="username" />
+                    </div>
+                    <div class="form-group">
+                        <label>Nama</label>
+                        <input type="text" class="form-control" name="nama" />
+                    </div>
+                    <div class="form-group">
+                        <label>Nomor Telepon</label>
+                        <input type="text" class="form-control" name="noTelepon" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tempat Lahir</label>
+                        <input type="text" class="form-control" name="tempatLahir" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tanggal Lahir</label>
+                        <input type="datetime-local" class="form-control" name="tanggalLahir" />
+                    </div>
+                    <div class="form-group">
+                        <label>Alamat</label>
+                        <input type="text" class="form-control" name="alamat"/>
                     </div>
                     <div class="form-group">
                         <label>Password</label>
@@ -26,7 +46,7 @@
                     </div>
                     <div class="form-group">
                         <label>Role</label>
-                        <select name="role" class="form-control">
+                        <select name="idRole" class="form-control">
                             <option selected value="">-- Pilih Role --</option>
                             <option th:each="role : ${listRole}" th:value="${role.id}" th:text="${role.role}"></option>
                         </select>
