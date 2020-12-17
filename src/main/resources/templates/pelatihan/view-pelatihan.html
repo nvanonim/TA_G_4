@@ -62,33 +62,40 @@
             </div>
         </section>
         <br><br>
-        <section>
-            <h3 th:text="${title}"></h3>
-            <table class="table" th:if="${status == true}">
-                <thead>
-                    <tr th:if="${status == true}">
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>No Telepon</th>
-                        <th>Alamat</th>
-                        <th>Departemen</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="peserta, iterationStatus : ${listPeserta}"
-                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+        <div th:unless="${error_msg == null}">
+            <div class="alert alert-danger" role="alert" th:text="${error_msg}">
+            </div>
+        </div>
+        <div th:unless="${success_msg == null}">
+            <div class="alert alert-success" role="alert" th:text="${success_msg}">
+            </div>
+        </div>
+        <h3 th:text="${title}"></h3>
+        <table class="table" th:if="${status == true}">
+            <thead>
+                <tr th:if="${status == true}">
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>No Telepon</th>
+                    <th>Alamat</th>
+                    <th>Departemen</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="peserta, iterationStatus : ${listPeserta}"
+                    th:style="${iterationStatus.even} ? 'font-weight:bold;'">
 
-                        <td th:text="${iterationStatus.count}"></td>
-                        <td th:text="${peserta.getPeserta().getNamaPeserta()}"></td>
-                        <td th:text="${peserta.getPeserta().getNoTelepon()}"></td>
-                        <td th:text="${peserta.getPeserta().getAlamat()}"></td>
-                        <td th:text="${peserta.getPeserta().getDepartemen()}"></td>
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${peserta.getPeserta().getNamaPeserta()}"></td>
+                    <td th:text="${peserta.getPeserta().getNoTelepon()}"></td>
+                    <td th:text="${peserta.getPeserta().getAlamat()}"></td>
+                    <td th:text="${peserta.getPeserta().getDepartemen()}"></td>
 
-                    </tr>
-                </tbody>
-            </table>
-            </form>
+                </tr>
+            </tbody>
+        </table>
+        </form>
         </section>
     </div>
 </body>
