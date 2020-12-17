@@ -13,7 +13,7 @@ import apap.tugas.sipelatihan.model.RoleModel;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PegawaiDetail {
     // @JsonProperty("idPegawai")
-    // private String idPegawai;
+    private String idPegawai;
 
     @JsonProperty("username")
     private String username;
@@ -28,7 +28,7 @@ public class PegawaiDetail {
     private String tempatLahir;
 
     @JsonProperty("tanggalLahir")
-    // @DateTimeFormat(pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date tanggalLahir;
 

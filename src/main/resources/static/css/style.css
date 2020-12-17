@@ -126,3 +126,17 @@ body {
     background:#383838;
     border-radius: 5px;
 }
+
+.card {
+    box-shadow: 0px 15px 10px rgba(0, 0, 0, 0.25);
+    width: auto;
+}
+
+.card-header {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 31px;
+    color: #FFFFFF;
+    background: #383838;
+    border-radius: 5px;
+}

@@ -46,7 +46,7 @@
                     </div>
                     <div class="form-group">
                         <label>Role</label>
-                        <select name="role" class="form-control">
+                        <select name="idRole" class="form-control">
                             <option selected value="">-- Pilih Role --</option>
                             <option th:each="role : ${listRole}" th:value="${role.id}" th:text="${role.role}"></option>
                         </select>
