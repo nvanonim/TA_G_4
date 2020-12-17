@@ -18,4 +18,5 @@ public class PelatihanRestServiceImpl implements PelatihanRestService {
     public PelatihanModel createPelatihan(PelatihanModel pelatihan) {
         return pelatihanDb.save(pelatihan);
     }
+
 }
