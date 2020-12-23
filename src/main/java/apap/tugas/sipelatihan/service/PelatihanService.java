@@ -14,4 +14,6 @@ public interface PelatihanService {
 
     List<PelatihanModel> getPelatihanFromPengguna(UserModel user);
 
+    void deletePelatihan(Long id);
+
 }

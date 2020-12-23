@@ -161,4 +161,19 @@ public class PelatihanController {
         return "redirect:/pelatihan/add?success";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deletePelatihan(
+            @PathVariable(value = "id") Long id, Model model) {
+        model.addAttribute("id", id);
+        if (id == null) {
+            return "error-page";
+        }
+        PelatihanModel pelatihan = pelatihanService.getPelatihanById(id);
+        if(pelatihan.getStatus_persetujuan() == 2) {
+            return "redirect:/pelatihan/view/" + id + "?errorx";
+        }else{
+            pelatihanService.deletePelatihan(id);
+            return "pelatihan/success-delete-pelatihan";
+        }
+    }
 }

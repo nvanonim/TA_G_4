@@ -36,4 +36,8 @@ public class PelatihanServiceImpl implements PelatihanService {
         return pelatihanDb.findByPengaju(user);
     }
 
+    @Override
+    public void deletePelatihan(Long id){
+        pelatihanDb.deleteById(id);
+    }
 }
