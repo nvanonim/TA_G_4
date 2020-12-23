@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Pelatihan</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<object th:replace="fragments/fragment :: navbar"></object>
+<section class="container-fluid py-5" style="height: calc(100% - 56px)">
+    <div class="row-cols-1 h-100 mx-auto justify-content-center align-items-center">
+        <p>Berhasil menghapus pelatihan dengan ID <span th:text="${id}"></span> </p>
+<!--        harusnya diback ke daftar pelatihan-->
+        <a th:href="@{/}">Kembali ke home</a>
+    </div>
+</section>
+</body>
+
+</html>

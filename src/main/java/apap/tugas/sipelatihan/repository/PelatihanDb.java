@@ -14,4 +14,5 @@ public interface PelatihanDb extends JpaRepository<PelatihanModel, Long> {
     Optional<PelatihanModel> findById(Long Id);
 
     List<PelatihanModel> findByPengaju(UserModel pengaju);
+    void deleteById(Long id);
 }
