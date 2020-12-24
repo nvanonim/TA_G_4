@@ -34,6 +34,10 @@ public class PelatihanServiceImpl implements PelatihanService {
                 return false;
             }
         }
+
+        pelatihan.setStatus_persetujuan(pelatihanModel.getStatus_persetujuan());
+        pelatihan.setPenyetuju(pelatihanModel.getPenyetuju());
+
         pelatihanDb.save(pelatihan);
         return true;
     }
