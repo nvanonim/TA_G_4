@@ -148,8 +148,7 @@ public class PelatihanController {
         if (pelatihan.getTanggal_mulai().after(pelatihan.getTanggal_selesai())) {
             return "redirect:/pelatihan/add?errort";
         } else {
-            if (pelatihan.getWaktu_mulai().after(pelatihan.getWaktu_selesai())
-                    || pelatihan.getWaktu_mulai().equals(pelatihan.getWaktu_selesai())) {
+            if (pelatihan.getWaktu_mulai().after(pelatihan.getWaktu_selesai())) {
                 return "redirect:/pelatihan/add?errorw";
             } else {
                 UserModel pengaju = userService.getUserByUsername(auth.getName());
@@ -159,6 +158,40 @@ public class PelatihanController {
         }
 
         return "redirect:/pelatihan/add?success";
+    }
+
+    @GetMapping("/change/{id}")
+    public String changePelatihan(
+            @PathVariable("id") Long id, Model model
+    ) {
+        model.addAttribute("pelatihan", pelatihanService.getPelatihanById(id));
+        model.addAttribute("listJenisPelatihan", jenisPelatihanService.getJenisPelatihanList());
+        model.addAttribute("listTrainer", trainerService.getTrainerList());
+
+        return "pelatihan/change-pelatihan";
+    }
+
+    @PostMapping("/change/{id}")
+    public String changePelatihanSubmit(
+            @ModelAttribute PelatihanModel pelatihan,
+            @RequestParam("userPengaju") String userPengaju,
+            @PathVariable("id") Long id,
+            Model model
+    ) {
+        if (pelatihan.getTanggal_mulai().after(pelatihan.getTanggal_selesai())) {
+            return String.format("redirect:/pelatihan/change/%s?errort", id);
+        } else {
+            if (pelatihan.getWaktu_mulai().after(pelatihan.getWaktu_selesai())) {
+                return String.format("redirect:/pelatihan/change/%s?errorw", id);
+            } else {
+                UserModel pengaju = userService.getUserByUsername(userPengaju);
+                pelatihan.setPengaju(pengaju);
+                if (!pelatihanService.changePelatihan(pelatihan))
+                    return String.format("redirect:/pelatihan/change/%s?errork", id);
+            }
+        }
+
+        return String.format("redirect:/pelatihan/view/%s?edits", id);
     }
 
     @GetMapping("/delete/{id}")

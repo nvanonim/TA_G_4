@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/user/add").permitAll()
                 .antMatchers("/api/v1/**").permitAll()
-                .antMatchers("/peserta/tambah").hasAnyAuthority("Karyawan")
+                // .antMatchers("/peserta/tambah").hasAnyAuthority("Karyawan")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
