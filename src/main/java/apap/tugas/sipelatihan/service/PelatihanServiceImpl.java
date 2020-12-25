@@ -27,6 +27,22 @@ public class PelatihanServiceImpl implements PelatihanService {
     }
 
     @Override
+    public boolean changePelatihan(PelatihanModel pelatihan) {
+        PelatihanModel pelatihanModel = getPelatihanById(pelatihan.getId());
+        if (pelatihanModel.getListPesertaPelatihan() != null) {
+            if (pelatihan.getKapasitas() < pelatihanModel.getListPesertaPelatihan().size()) {
+                return false;
+            }
+        }
+
+        pelatihan.setStatus_persetujuan(pelatihanModel.getStatus_persetujuan());
+        pelatihan.setPenyetuju(pelatihanModel.getPenyetuju());
+
+        pelatihanDb.save(pelatihan);
+        return true;
+    }
+
+    @Override
     public List<PelatihanModel> getAll() {
         return pelatihanDb.findAll();
     }

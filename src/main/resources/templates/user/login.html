@@ -26,11 +26,12 @@
                         <label>Username</label>
                         <input type="text" name="username" class="form-control" />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label>Password</label>
                         <input type="password" name="password" class="form-control" />
                     </div>
-                    <br>
+                    <a th:href="@{/user/add}" class="text-wrap font-italic">Register</a>
+                    <br><br>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
