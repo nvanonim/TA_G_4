@@ -90,11 +90,11 @@
                     <tr th:each="peserta, iterationStatus : ${listPeserta}"
                         th:style="${iterationStatus.even} ? 'font-weight:bold;'">
 
-                        <td th:text="${iterationStatus.count}"></td>
-                        <td th:text="${peserta.getPeserta().getNamaPeserta()}"></td>
-                        <td th:text="${peserta.getPeserta().getNoTelepon()}"></td>
-                        <td th:text="${peserta.getPeserta().getAlamat()}"></td>
-                        <td th:text="${peserta.getPeserta().getDepartemen()}"></td>
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${peserta.getPeserta().getNamaPeserta()}"></td>
+                    <td th:text="${peserta.getPeserta().getNoTelepon()}"></td>
+                    <td th:text="${peserta.getPeserta().getAlamat()}"></td>
+                    <td th:text="${peserta.getPeserta().getDepartemen()}"></td>
 
                     </tr>
                 </tbody>
