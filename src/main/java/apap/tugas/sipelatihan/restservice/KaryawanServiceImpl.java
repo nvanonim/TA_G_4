@@ -1,6 +1,7 @@
 package apap.tugas.sipelatihan.restservice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import apap.tugas.sipelatihan.rest.KaryawanBaruDto;
 import apap.tugas.sipelatihan.rest.KaryawanBaruResponse;
 import apap.tugas.sipelatihan.rest.Setting;
 import apap.tugas.sipelatihan.service.PesertaService;
+import apap.tugas.sipelatihan.rest.KaryawanBaruDto;
 
 @Service
 public class KaryawanServiceImpl implements KaryawanService {
@@ -39,10 +41,10 @@ public class KaryawanServiceImpl implements KaryawanService {
     public List<PesertaPelatihanModel> imporKaryawanToPelatihan(PelatihanModel pelatihan) throws Exception {
         KaryawanBaruResponse baseErr = new KaryawanBaruResponse();
         baseErr.setStatus(404);
-        KaryawanBaruResponse response = this.webClient.get().uri("impor-karyawan").retrieve()
-                .bodyToMono(KaryawanBaruResponse.class).onErrorReturn(baseErr).block();
+        KaryawanBaruDto[] response = this.webClient.get().uri("impor-karyawan-human").retrieve()
+                .bodyToMono(KaryawanBaruDto[].class).block();
 
-        List<KaryawanBaruDto> query = response.getResult();
+        List<KaryawanBaruDto> query = Arrays.asList(response);
 
         List<PesertaPelatihanModel> added = new ArrayList<>();
         PesertaModel newPeserta;
@@ -62,13 +64,18 @@ public class KaryawanServiceImpl implements KaryawanService {
     }
 
     private PesertaModel convertKaryawanToPesertaModel(KaryawanBaruDto karyawan) {
-        PesertaModel isThereAny = pesertaDb.findByNamaPeserta(karyawan.getNama());
-        if (isThereAny != null) {
-            return isThereAny;
-        }
+        // PesertaModel isThereAny = pesertaDb.findByNamaPeserta(karyawan.getNama());
+        // //kalo misalkan nama unik -> biar ga nambahin karyawan baru terus ke peserta
+        // if (isThereAny != null) {
+        // return isThereAny;
+        // }
         PesertaModel peserta = new PesertaModel();
         peserta.setAlamat(karyawan.getAlamat());
-        peserta.setDepartemen(karyawan.getDivisi());
+        if (karyawan.getDivisi() != null) {
+            peserta.setDepartemen(karyawan.getDivisi());
+        } else {
+            peserta.setDepartemen("Karyawan Baru");
+        }
         peserta.setNamaPeserta(karyawan.getNama());
         peserta.setNoTelepon(karyawan.getNoTelepon());
         pesertaDb.save(peserta);
