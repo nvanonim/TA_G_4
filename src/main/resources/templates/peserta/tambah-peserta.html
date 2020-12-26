@@ -15,15 +15,6 @@
         <div class="row-cols-1 h-100 mx-auto justify-content-center align-items-center">
             <div th:replace="fragments/div :: headVar(title='Add Peserta', col='5')"></div>
             <div class="col-md-5 col-12 mx-auto p-4 shadow">
-                <!-- <div th:if="${param.errort}" class="text-center mb-2 font-weight-bold">
-                    <span class="text-warning">Tanggal selesai tidak boleh mendahului tanggal mulai</span>
-                </div>
-                <div th:if="${param.errorw}" class="text-center mb-2 font-weight-bold">
-                    <span class="text-warning">Waktu selesai tidak boleh sama atau mendahului waktu mulai</span>
-                </div>
-                <div th:if="${param.success}" class="text-center mb-2 font-weight-bold">
-                    <span class="text-success">Pelatihan berhasil ditambahkan!</span>
-                </div> -->
                 <form class="text-secondary" th:action="@{/peserta/add}" th:object="${peserta}" method="POST">
                     <div class="form-group">
                         <label for="nama">Nama</label>
