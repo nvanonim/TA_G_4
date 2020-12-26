@@ -59,6 +59,14 @@
         </div>
         </section>
         <br><br>
+        <div th:unless="${error_msg == null}">
+            <div class="alert alert-danger" role="alert" th:text="${error_msg}">
+            </div>
+        </div>
+        <div th:unless="${success_msg == null}">
+            <div class="alert alert-success" role="alert" th:text="${success_msg}">
+            </div>
+        </div>
         <section class="container-fluid py-5" style="height: calc(100% - 30px)">
             <div class="row-cols-1 h-100 mx-auto justify-content-center align-items-center">
                 <div class="col-md-5 col-12 mx-auto mb-3 px-0">
@@ -82,11 +90,11 @@
                     <tr th:each="peserta, iterationStatus : ${listPeserta}"
                         th:style="${iterationStatus.even} ? 'font-weight:bold;'">
 
-                        <td th:text="${iterationStatus.count}"></td>
-                        <td th:text="${peserta.getPeserta().getNamaPeserta()}"></td>
-                        <td th:text="${peserta.getPeserta().getNoTelepon()}"></td>
-                        <td th:text="${peserta.getPeserta().getAlamat()}"></td>
-                        <td th:text="${peserta.getPeserta().getDepartemen()}"></td>
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${peserta.getPeserta().getNamaPeserta()}"></td>
+                    <td th:text="${peserta.getPeserta().getNoTelepon()}"></td>
+                    <td th:text="${peserta.getPeserta().getAlamat()}"></td>
+                    <td th:text="${peserta.getPeserta().getDepartemen()}"></td>
 
                     </tr>
                 </tbody>

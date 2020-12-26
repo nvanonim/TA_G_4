@@ -16,4 +16,7 @@ public interface PesertaService {
             PelatihanModel pelatihan) throws Exception;
 
     public List<PesertaModel> getAllPeserta();
+
+    public PesertaPelatihanModel assignPelatihanToPesertaPelatihan(PelatihanModel pelatihan,
+            PesertaPelatihanModel pesertaPelatihan);
 }
