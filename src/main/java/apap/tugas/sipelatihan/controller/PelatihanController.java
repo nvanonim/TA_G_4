@@ -170,6 +170,9 @@ public class PelatihanController {
         } else {
             if (pelatihan.getWaktu_mulai().after(pelatihan.getWaktu_selesai())) {
                 return "redirect:/pelatihan/add?errorw";
+            } else if (pelatihan.getTanggal_mulai().equals(pelatihan.getTanggal_selesai()) && pelatihan.getWaktu_mulai()
+                    .equals(pelatihan.getWaktu_selesai())) {
+                return "redirect:/pelatihan/add?errorw";
             } else {
                 UserModel pengaju = userService.getUserByUsername(auth.getName());
                 pelatihan.setPengaju(pengaju);
@@ -202,6 +205,9 @@ public class PelatihanController {
             return String.format("redirect:/pelatihan/change/%s?errort", id);
         } else {
             if (pelatihan.getWaktu_mulai().after(pelatihan.getWaktu_selesai())) {
+                return String.format("redirect:/pelatihan/change/%s?errorw", id);
+            } else if (pelatihan.getTanggal_mulai().equals(pelatihan.getTanggal_selesai())
+                    && pelatihan.getWaktu_mulai().equals(pelatihan.getWaktu_selesai())) {
                 return String.format("redirect:/pelatihan/change/%s?errorw", id);
             } else {
                 UserModel pengaju = userService.getUserByUsername(userPengaju);

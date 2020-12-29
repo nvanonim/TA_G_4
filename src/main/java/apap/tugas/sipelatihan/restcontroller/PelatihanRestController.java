@@ -27,11 +27,6 @@ public class PelatihanRestController {
     @Autowired
     private PelatihanRestService pelatihanRestService;
 
-    private JenisPelatihanService jenisPelatihanService;
-
-    @Autowired
-    private TrainerService trainerService;
-
     @PostMapping("/pelatihan")
     private BaseResponse<PelatihanModel> createPelatihan(@Valid @RequestBody PelatihanModel pelatihanModel,
             BindingResult bindingResult,
@@ -43,22 +38,43 @@ public class PelatihanRestController {
             );
         }
         else {
-            // Onboarding selalu id 1
-            // Trainer selalu ke id 1
-            long idDefault = 1;
-            JenisPelatihanModel jenisPelatihan = new JenisPelatihanModel();
-            jenisPelatihan.setId(idDefault);
-            TrainerModel trainer = new TrainerModel();
-            trainer.setId(idDefault);
+            if (pelatihanModel.getTanggal_mulai().after(pelatihanModel.getTanggal_selesai())) {
+                response.setStatus(400);
+                response.setMessage("Tanggal selesai tidak boleh mendahului tanggal mulai");
+                response.setResult(null);
 
-            pelatihanModel.setJenisPelatihan(jenisPelatihan);
-            pelatihanModel.setTrainer(trainer);
+            } else {
+                if (pelatihanModel.getWaktu_mulai().after(pelatihanModel.getWaktu_selesai())) {
+                    response.setStatus(400);
+                    response.setMessage("Waktu selesai tidak boleh sama atau mendahului waktu mulai");
+                    response.setResult(null);
 
-            PelatihanModel pelatihan = pelatihanRestService.createPelatihan(pelatihanModel);
+                } else if (pelatihanModel.getTanggal_mulai().equals(pelatihanModel.getTanggal_selesai())
+                        && pelatihanModel.getWaktu_mulai().equals(pelatihanModel.getWaktu_selesai())) {
+                    response.setStatus(400);
+                    response.setMessage("Waktu selesai tidak boleh sama atau mendahului waktu mulai");
+                    response.setResult(null);
 
-            response.setStatus(200);
-            response.setMessage("success");
-            response.setResult(pelatihan);
+                } else {
+                    // Onboarding selalu id 1
+                    // Trainer selalu ke id 1
+                    long idDefault = 1;
+                    JenisPelatihanModel jenisPelatihan = new JenisPelatihanModel();
+                    jenisPelatihan.setId(idDefault);
+                    TrainerModel trainer = new TrainerModel();
+                    trainer.setId(idDefault);
+
+                    pelatihanModel.setJenisPelatihan(jenisPelatihan);
+                    pelatihanModel.setTrainer(trainer);
+
+                    PelatihanModel pelatihan = pelatihanRestService.createPelatihan(pelatihanModel);
+
+                    response.setStatus(200);
+                    response.setMessage("success");
+                    response.setResult(pelatihan);
+                    
+                }
+            }
 
             return response;
         }
