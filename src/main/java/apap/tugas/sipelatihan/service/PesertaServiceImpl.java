@@ -32,28 +32,42 @@ public class PesertaServiceImpl implements PesertaService {
     @Override
     public List<PesertaPelatihanModel> assignManyPesertaToPelatihan(List<PesertaPelatihanModel> peserta,
             PelatihanModel pelatihan) throws Exception {
-        Optional<PelatihanModel> optTargetPelatihan = pelatihanDb.findById(pelatihan.getId());
-        if (!optTargetPelatihan.isPresent()) {
-            throw new Exception("ID pelatihan tidak ada");
-        }
-        PelatihanModel target = optTargetPelatihan.get();
-        if (peserta.size() + target.getListPesertaPelatihan().size() > target.getKapasitas()) {
-            throw new Exception("Melebihi kapasitas");
-        }
+
+        PelatihanModel target = checkIfPelatihanValidCanAssignedManyPeserta(pelatihan, peserta);
 
         List<PesertaPelatihanModel> tambah = new ArrayList<>();
         for (PesertaPelatihanModel pesertaPelatihanModel : peserta) {
             if (pesertaPelatihanDb.findByPelatihanAndPeserta(target, pesertaPelatihanModel.getPeserta()).size() > 0) {
                 continue;
             }
-            pesertaPelatihanModel.setPelatihan(target);
-            pesertaPelatihanModel.setNoPeserta(target.getId() + "-"
-                    + pesertaPelatihanModel.getPeserta().getDepartemen().toUpperCase().substring(0, 2) + "-"
-                    + pesertaPelatihanModel.getPeserta().getId());
-            pesertaPelatihanDb.save(pesertaPelatihanModel);
+            assignPelatihanToPesertaPelatihan(pelatihan, pesertaPelatihanModel);
             tambah.add(pesertaPelatihanModel);
         }
         return tambah;
+    }
+
+    public PesertaPelatihanModel assignPelatihanToPesertaPelatihan(PelatihanModel pelatihan,
+            PesertaPelatihanModel pesertaPelatihan) {
+        pesertaPelatihan.setPelatihan(pelatihan);
+        pesertaPelatihan.setNoPeserta(
+                pelatihan.getId() + "-" + pesertaPelatihan.getPeserta().getDepartemen().toUpperCase().substring(0, 2)
+                        + "-" + pesertaPelatihan.getPeserta().getId());
+        pesertaPelatihanDb.save(pesertaPelatihan);
+        return pesertaPelatihan;
+    }
+
+    private PelatihanModel checkIfPelatihanValidCanAssignedManyPeserta(PelatihanModel pelatihan,
+            List<PesertaPelatihanModel> peserta) throws Exception {
+        Optional<PelatihanModel> optTargetPelatihan = pelatihanDb.findById(pelatihan.getId());
+        if (!optTargetPelatihan.isPresent()) {
+            throw new Exception("ID pelatihan tidak ada");
+        }
+        if (peserta.size() + optTargetPelatihan.get().getListPesertaPelatihan().size() > optTargetPelatihan.get()
+                .getKapasitas()) {
+            throw new Exception("Melebihi kapasitas");
+        }
+
+        return optTargetPelatihan.get();
     }
 
     @Override

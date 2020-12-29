@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Peserta</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-11">
+                <br>
+                <br>
+                <a th:href="@{/peserta/add}" class="btn btn-success">+ Tambah Peserta</a>
+                <br><br>
+                <div class="card pilot">
+                    <div class="card-header" id="center">
+                        <h3 class="text-center">Daftar Peserta</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="col">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>No Telepon</th>
+                                            <th>Departemen</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="peserta, iterationStatus : ${pesertas}">
+                                            <td th:text="${iterationStatus.count}"></td>
+                                            <td th:text="${peserta.namaPeserta}"></td>
+                                            <td th:text="${peserta.noTelepon}"></td>
+                                            <td th:text="${peserta.departemen}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

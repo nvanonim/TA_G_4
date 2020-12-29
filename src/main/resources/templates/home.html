@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
 <body>
@@ -15,7 +16,7 @@
             <div class="col">
                 <h1 class="title">Selamat Datang di SI-Pelatihan!</h1>
                 <p class="subtitle">Sistem informasi untuk manajemen pengelolaan pelatihan karyawan</p>
-            </div>                
+            </div>
         </div>
     </div>
     <div class="container-fluid">
@@ -39,13 +40,14 @@
                     </div>
                     <div class="cari-pilot col-md-3 fix">
                         <p>Peserta</p>
-                        <a th:href="@{/peserta/tambah}" class="btn">
-                            Tambah Peserta
+                        <a th:href="@{/peserta}" class="btn">
+                            Peserta
                         </a>
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>

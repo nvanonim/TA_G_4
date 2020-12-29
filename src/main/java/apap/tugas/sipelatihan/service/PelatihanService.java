@@ -10,8 +10,12 @@ public interface PelatihanService {
 
     void addPelatihan(PelatihanModel pelatihan);
 
+    boolean changePelatihan(PelatihanModel pelatihan);
+
     List<PelatihanModel> getAll();
 
     List<PelatihanModel> getPelatihanFromPengguna(UserModel user);
+
+    void deletePelatihan(Long id);
 
 }
