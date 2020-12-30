@@ -60,7 +60,7 @@ public class UserController {
     
     @PostMapping("/user/add")
     public String addUserSubmit(@ModelAttribute PegawaiDetail pegawai, Model model) {
-        // try {
+        try {
             if (userService.getUserByUsername(pegawai.getUsername()) == null) {
                 try {
                     Long test = Long.parseLong(pegawai.getNoTelepon());
@@ -83,12 +83,12 @@ public class UserController {
                 model.addAttribute("pegawai", new PegawaiDetail());
                 return "user/add-user";
             }    
-        // } catch (Exception e) {
-            // model.addAttribute("listRole", roleService.findAll());
-            // // model.addAttribute("user", new UserModel());
-            // model.addAttribute("pegawai", new PegawaiDetail());
-            // return "user/add-user"; 
-        // }
+        } catch (Exception e) {
+            model.addAttribute("listRole", roleService.findAll());
+            model.addAttribute("msg", "Username Invalid on Server");
+            model.addAttribute("pegawai", new PegawaiDetail());
+            return "user/add-user"; 
+        }
         
     }
 

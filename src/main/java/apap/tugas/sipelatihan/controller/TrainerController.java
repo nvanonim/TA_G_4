@@ -73,16 +73,16 @@ public class TrainerController {
         if (noKtp.equals(noKtp_old)) {
             trainerService.updateTrainer(trainer);
             model.addAttribute("id", trainer.getId());
-            return "trainer/add-trainer";
+            return "trainer/update-trainer";
         } else {
             if (trainerService.validateKTP(noKtp)) {
                 trainerService.updateTrainer(trainer);
                 model.addAttribute("id", trainer.getId());
-                return "trainer/add-trainer";
+                return "trainer/update-trainer";
             } else {
                 String msg = "Nomor KTP yang anda masukkan sudah terdaftar di dalam Database";
                 model.addAttribute("msg", msg);
-                return "trainer/add-trainer";
+                return "trainer/update-trainer";
             }   
         }        
     }
