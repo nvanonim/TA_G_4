@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -46,10 +46,12 @@
                                             <td>
                                                 <a th:href="@{/pelatihan/view/} + ${pelatihan.id}"
                                                     class="btn btn-outline-primary">Detail</a>
+                                                <div sec:authorize="hasAnyAuthority('Staff Training', 'Kepala Bagian')">
                                                 <a th:href="@{/pelatihan/change/} + ${pelatihan.id}"
                                                     class="btn btn-outline-warning">Change</a>
                                                 <a th:href="@{/pelatihan/delete/} + ${pelatihan.id}"
                                                     class="btn btn-outline-danger">Delete</a>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
