@@ -60,23 +60,35 @@ public class UserController {
     
     @PostMapping("/user/add")
     public String addUserSubmit(@ModelAttribute PegawaiDetail pegawai, Model model) {
-        try {
+        // try {
             if (userService.getUserByUsername(pegawai.getUsername()) == null) {
+                try {
+                    Long test = Long.parseLong(pegawai.getNoTelepon());
+                } catch (Exception e) {
+                    model.addAttribute("msg", "Nomor Telepon Invalid");
+                    model.addAttribute("listRole", roleService.findAll());
+                    model.addAttribute("pegawai", new PegawaiDetail());
+                    return "user/add-user";
+                }
                 UserModel user = new UserModel();
                 user.setUsername(pegawai.getUsername());
                 user.setPassword(pegawai.getPassword());
                 user.setRole(roleDb.findById(pegawai.getIdRole()).get());
-
                 userRestService.addPegawai(pegawai);
                 userService.addUser(user);
-            }
-            return "redirect:/login";    
-        } catch (Exception e) {
-            model.addAttribute("listRole", roleService.findAll());
-            // model.addAttribute("user", new UserModel());
-            model.addAttribute("pegawai", new PegawaiDetail());
-            return "user/add-user"; 
-        }
+                return "redirect:/login";
+            } else {
+                model.addAttribute("msg", "Username Invalid");
+                model.addAttribute("listRole", roleService.findAll());
+                model.addAttribute("pegawai", new PegawaiDetail());
+                return "user/add-user";
+            }    
+        // } catch (Exception e) {
+            // model.addAttribute("listRole", roleService.findAll());
+            // // model.addAttribute("user", new UserModel());
+            // model.addAttribute("pegawai", new PegawaiDetail());
+            // return "user/add-user"; 
+        // }
         
     }
 
