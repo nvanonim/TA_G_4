@@ -15,15 +15,21 @@ import apap.tugas.sipelatihan.repository.TrainerDb;
 public class TrainerServiceImpl implements TrainerService {
     @Autowired
     TrainerDb trainerDb;
-
+    
+    
     @Override
-    public void addTrainer(TrainerModel trainer) {
-        trainerDb.save(trainer);
+    public TrainerModel getTrainerById(Long id) {
+        return trainerDb.findById(id).get();
     }
 
     @Override
     public List<TrainerModel> getTrainerList() {
         return trainerDb.findAll();
+    }
+
+    @Override
+    public void addTrainer(TrainerModel trainer) {
+        trainerDb.save(trainer);
     }
 
     @Override
@@ -48,16 +54,7 @@ public class TrainerServiceImpl implements TrainerService {
     }
 
     @Override
-    public void deleteTrainer(String noKtp) {
-        TrainerModel trainer = getTrainerByNomorKTP(noKtp);
-        trainerDb.delete(trainer);
-
-    }
-
-    @Override
-    public TrainerModel getTrainerById(Long id) {
-        return trainerDb.findById(id).get();
-    }
-    
-    
+    public void deleteTrainer(Long id) {
+        trainerDb.deleteById(id);
+    }   
 }

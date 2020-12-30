@@ -9,7 +9,7 @@ public interface TrainerService {
 
     void updateTrainer(TrainerModel trainer);
 
-    void deleteTrainer(String noKtp);
+    void deleteTrainer(Long id);
 
     TrainerModel getTrainerByNomorKTP(String noKtp);
 

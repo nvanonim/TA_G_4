@@ -84,4 +84,14 @@ public class TrainerController {
             }   
         }        
     }
+
+    @GetMapping("/trainer/delete/{id}")
+    public String deleteTrainer(
+        @PathVariable("id") Long id,
+        Model model
+    ) {
+        trainerService.deleteTrainer(id);
+        model.addAttribute("id", id);
+        return "trainer/list-trainer";
+    }
 }
