@@ -24,7 +24,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/user/add").permitAll()
                 .antMatchers("/api/v1/**").permitAll()
-<<<<<<< Updated upstream
                 .antMatchers("/trainer/add").hasAnyAuthority("Staff Training")
                 .antMatchers("/trainer/update/**").hasAnyAuthority("Staff Training")
                 .antMatchers("/pelatihan").hasAnyAuthority("Staff Training", "Kepala Bagian", "Kepala Departemen HR")
@@ -34,10 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/pelatihan/delete/**").hasAnyAuthority("Staff Training", "Kepala Bagian", "Kepala Departemen HR")
                 .antMatchers("/peserta/add").hasAnyAuthority("Staff Training", "Kepala Bagian")
                 .antMatchers("/pelatihan/*/add/peserta").hasAnyAuthority("Staff Training", "Kepala Bagian")
-=======
-                .antMatchers("/peserta/tambah").hasAnyAuthority("Karyawan")
-                .antMatchers("/pelatihan/view/**").hasAnyAuthority("Kepala Bagian", "Kepala Departemen HR","Staff Training")
->>>>>>> Stashed changes
+                .antMatchers("/peserta/laporan").hasAnyAuthority("Kepala Bagian")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
