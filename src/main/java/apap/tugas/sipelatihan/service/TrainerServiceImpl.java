@@ -26,16 +26,6 @@ public class TrainerServiceImpl implements TrainerService {
         return trainerDb.findAll();
     }
 
-    // @Override
-    // public TrainerModel getTrainerByNomorKTP(String no_ktp) {
-    //     return null;
-    // }
-
-    // @Override
-    // public Boolean validateKTP(String no_ktp) {
-    //     return null;
-    // }
-
     @Override
     public Boolean validateKTP(String noKtp) {
         try {
@@ -49,6 +39,24 @@ public class TrainerServiceImpl implements TrainerService {
     @Override
     public TrainerModel getTrainerByNomorKTP(String noKtp) {
         return trainerDb.findByNoKtp(noKtp).get();
+    }
+
+    @Override
+    public void updateTrainer(TrainerModel trainer) {
+        trainerDb.save(trainer);
+
+    }
+
+    @Override
+    public void deleteTrainer(String noKtp) {
+        TrainerModel trainer = getTrainerByNomorKTP(noKtp);
+        trainerDb.delete(trainer);
+
+    }
+
+    @Override
+    public TrainerModel getTrainerById(Long id) {
+        return trainerDb.findById(id).get();
     }
     
     

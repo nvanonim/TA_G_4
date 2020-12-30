@@ -46,7 +46,12 @@
                                             <td th:text="${trainer.noTelepon}"></td>
                                             <td th:text="${trainer.email}"></td>
                                             <td>
-                                                <a th:href="@{#}" class="btn btn-outline-primary">Ubah</a>
+                                                <!-- <a th:href="@{/trainer/update/} + ${trainer.noKtp}" 
+                                                    class="btn btn-outline-primary">Ubah</a> -->
+                                                <a th:href="@{/trainer/update/} + ${trainer.id}" 
+                                                    class="btn btn-outline-warning">Update</a>
+                                                <a th:href="@{#} + ${trainer.id}" 
+                                                    class="btn btn-outline-danger">Delete</a>    
                                             </td>                                                
                                         </tr>
                                     </tbody>

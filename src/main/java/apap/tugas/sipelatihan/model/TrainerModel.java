@@ -1,8 +1,5 @@
 package apap.tugas.sipelatihan.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -24,7 +21,7 @@ public class TrainerModel implements Serializable {
     @NotNull
     @Size(max = 16)
     // @Column(name = "no_ktp", nullable = false, unique = true)
-    @Column(name = "no_ktp", nullable = false, unique = false)
+    @Column(name = "no_ktp", nullable = false)
     private String noKtp;
 
     @NotNull
