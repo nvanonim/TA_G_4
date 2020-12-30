@@ -91,7 +91,6 @@ public class TrainerModel implements Serializable {
         this.listPelatihan = listPelatihan;
     }
 
-
     public boolean isPresent() {
 		return true;
 	}

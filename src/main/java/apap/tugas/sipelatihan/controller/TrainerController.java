@@ -1,9 +1,11 @@
 package apap.tugas.sipelatihan.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +39,7 @@ public class TrainerController {
             model.addAttribute("id", trainer.getId());
             return "trainer/add-trainer";
         } else {
-            String msg = "Nomor KTP sudah terdaftar di dalam Database";
+            String msg = "Nomor KTP yang anda masukkan sudah terdaftar di dalam Database";
             model.addAttribute("msg", msg);
             return "trainer/add-trainer";
         }
@@ -78,20 +80,43 @@ public class TrainerController {
                 model.addAttribute("id", trainer.getId());
                 return "trainer/add-trainer";
             } else {
-                String msg = "Nomor KTP sudah terdaftar di dalam Database";
+                String msg = "Nomor KTP yang anda masukkan sudah terdaftar di dalam Database";
                 model.addAttribute("msg", msg);
                 return "trainer/add-trainer";
             }   
         }        
     }
 
-    @GetMapping("/trainer/delete/{id}")
+    @GetMapping({"/trainer/delete/{id}", "/trainer/delete/"})
     public String deleteTrainer(
-        @PathVariable("id") Long id,
+        @PathVariable(value ="id", required = false) Long id,
         Model model
-    ) {
-        trainerService.deleteTrainer(id);
-        model.addAttribute("id", id);
-        return "trainer/list-trainer";
+    ) throws Exception {
+        if (id != null) {
+            if (isTrainerExists(id)) {
+                trainerService.deleteTrainer(id);
+                model.addAttribute("id", id);
+                return "trainer/delete-trainer";    
+            } else {
+                String msg = "Id tidak dapat ditemukan!";
+                model.addAttribute("msg", msg);
+                return "trainer/delete-trainer";
+            }         
+        } else {
+            String msg = "Id tidak dapat ditemukan!";
+            model.addAttribute("msg", msg);
+            return "trainer/delete-trainer";
+        }
+        
+    }
+
+    private boolean isTrainerExists(Long id) {
+        try {
+            boolean cek = trainerService.getTrainerById(id).isPresent();
+            System.out.println(cek);
+            return cek;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 }
