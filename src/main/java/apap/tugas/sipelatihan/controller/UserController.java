@@ -60,7 +60,7 @@ public class UserController {
     
     @PostMapping("/user/add")
     public String addUserSubmit(@ModelAttribute PegawaiDetail pegawai, Model model) {
-        try {
+        // try {
             if (userService.getUserByUsername(pegawai.getUsername()) == null) {
                 UserModel user = new UserModel();
                 user.setUsername(pegawai.getUsername());
@@ -69,14 +69,19 @@ public class UserController {
 
                 userRestService.addPegawai(pegawai);
                 userService.addUser(user);
-            }
-            return "redirect:/login";    
-        } catch (Exception e) {
-            model.addAttribute("listRole", roleService.findAll());
-            // model.addAttribute("user", new UserModel());
-            model.addAttribute("pegawai", new PegawaiDetail());
-            return "user/add-user"; 
-        }
+                return "redirect:/login";
+            } else {
+                model.addAttribute("listRole", roleService.findAll());
+                // model.addAttribute("user", new UserModel());
+                model.addAttribute("pegawai", new PegawaiDetail());
+                return "user/add-user";
+            }    
+        // } catch (Exception e) {
+            // model.addAttribute("listRole", roleService.findAll());
+            // // model.addAttribute("user", new UserModel());
+            // model.addAttribute("pegawai", new PegawaiDetail());
+            // return "user/add-user"; 
+        // }
         
     }
 
