@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Form Add Trainer</title>
+    <title>Form Update Trainer</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
@@ -15,29 +15,34 @@
             <br>
             <br>
             <div class="col-4">
-                <div th:replace="fragments/div :: headVar(title='Add Pelatihan', col='12')"></div>
+                <div th:replace="fragments/div :: headVar(title='Update Pelatihan', col='12')"></div>
                 <div class="card mx-auto">
                     <div class="card-body">
-                        <form th:action="@{/trainer/add}" th:object="${trainer}" method="POST">
+                        <form th:action="@{/trainer/update/} + ${trainer.id}" th:object="${trainer}" method="POST">
+                            <input class="form-control mb-3 mt-1" type="hidden" name="id" th:value="*{id}"/>
                             <div class="form-group">
                                 <label for="nama_trainer">Nama:</label>
                                 <input name="namaTrainer" type="text" class="form-control" 
-                                    placeholder="Masukan nama" id="nama_trainer" required>
+                                    placeholder="Masukan nama" id="nama_trainer" required
+                                    th:field="*{namaTrainer}">
                             </div>
                             <div class="form-group">
                                 <label for="no_ktp">Nomor KTP:</label>
                                 <input name="noKtp" type="text" class="form-control" 
-                                    placeholder="Masukan nomor ktp" id="no_ktp" required>
+                                    placeholder="Masukan nomor ktp" id="no_ktp" required
+                                    th:field="*{noKtp}">
                             </div>
                             <div class="form-group">
                                 <label for="no_Telp">Nomor Telepon:</label>
                                 <input name="noTelepon" type="text" class="form-control" 
-                                    placeholder="Masukan nomor telepon" id="no_Telp" required>
+                                    placeholder="Masukan nomor telepon" id="no_Telp" required
+                                    th:field="*{noTelepon}">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
                                 <input name="email" type="text" class="form-control" 
-                                    placeholder="Masukan alamat email" id="email" required>
+                                    placeholder="Masukan alamat email" id="email" required
+                                    th:field="*{email}">
                             </div>
                             <button class="btn btn-success" type="submit" value="Submit">Submit</button>
                             <a th:href="@{/trainer}">Kembali</a>

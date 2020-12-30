@@ -15,10 +15,11 @@ import apap.tugas.sipelatihan.repository.TrainerDb;
 public class TrainerServiceImpl implements TrainerService {
     @Autowired
     TrainerDb trainerDb;
-
+    
+    
     @Override
-    public void addTrainer(TrainerModel trainer) {
-        trainerDb.save(trainer);
+    public TrainerModel getTrainerById(Long id) {
+        return trainerDb.findById(id).get();
     }
 
     @Override
@@ -26,15 +27,10 @@ public class TrainerServiceImpl implements TrainerService {
         return trainerDb.findAll();
     }
 
-    // @Override
-    // public TrainerModel getTrainerByNomorKTP(String no_ktp) {
-    //     return null;
-    // }
-
-    // @Override
-    // public Boolean validateKTP(String no_ktp) {
-    //     return null;
-    // }
+    @Override
+    public void addTrainer(TrainerModel trainer) {
+        trainerDb.save(trainer);
+    }
 
     @Override
     public Boolean validateKTP(String noKtp) {
@@ -50,6 +46,15 @@ public class TrainerServiceImpl implements TrainerService {
     public TrainerModel getTrainerByNomorKTP(String noKtp) {
         return trainerDb.findByNoKtp(noKtp).get();
     }
-    
-    
+
+    @Override
+    public void updateTrainer(TrainerModel trainer) {
+        trainerDb.save(trainer);
+
+    }
+
+    @Override
+    public void deleteTrainer(Long id) {
+        trainerDb.deleteById(id);
+    }   
 }

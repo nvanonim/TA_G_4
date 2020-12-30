@@ -1,26 +1,20 @@
 package apap.tugas.sipelatihan.controller;
 
 import java.security.Principal;
-import java.util.LinkedHashMap;
-import java.util.NoSuchElementException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
-import org.springframework.web.server.ResponseStatusException;
 
 import apap.tugas.sipelatihan.model.UserModel;
 import apap.tugas.sipelatihan.repository.RoleDb;
@@ -30,7 +24,6 @@ import apap.tugas.sipelatihan.rest.UserDetail;
 import apap.tugas.sipelatihan.service.RoleService;
 import apap.tugas.sipelatihan.service.UserRestService;
 import apap.tugas.sipelatihan.service.UserService;
-import reactor.core.publisher.Mono;
 
 @Controller
 // @RequestMapping("/api/v1")
@@ -66,17 +59,25 @@ public class UserController {
     }
     
     @PostMapping("/user/add")
-    public String addUserSubmit(@ModelAttribute PegawaiDetail pegawai) {
-        if (userService.getUserByUsername(pegawai.getUsername()) == null) {
-            UserModel user = new UserModel();
-            user.setUsername(pegawai.getUsername());
-            user.setPassword(pegawai.getPassword());
-            user.setRole(roleDb.findById(pegawai.getIdRole()).get());
+    public String addUserSubmit(@ModelAttribute PegawaiDetail pegawai, Model model) {
+        try {
+            if (userService.getUserByUsername(pegawai.getUsername()) == null) {
+                UserModel user = new UserModel();
+                user.setUsername(pegawai.getUsername());
+                user.setPassword(pegawai.getPassword());
+                user.setRole(roleDb.findById(pegawai.getIdRole()).get());
 
-            userRestService.addPegawai(pegawai);
-            userService.addUser(user);
+                userRestService.addPegawai(pegawai);
+                userService.addUser(user);
+            }
+            return "redirect:/login";    
+        } catch (Exception e) {
+            model.addAttribute("listRole", roleService.findAll());
+            // model.addAttribute("user", new UserModel());
+            model.addAttribute("pegawai", new PegawaiDetail());
+            return "user/add-user"; 
         }
-        return "redirect:/login";
+        
     }
 
     @RequestMapping(value = "/user/profil", method = RequestMethod.GET)
