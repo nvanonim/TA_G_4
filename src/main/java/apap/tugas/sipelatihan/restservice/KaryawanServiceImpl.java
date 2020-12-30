@@ -42,6 +42,8 @@ public class KaryawanServiceImpl implements KaryawanService {
         KaryawanBaruResponse baseErr = new KaryawanBaruResponse();
         baseErr.setStatus(404);
         KaryawanBaruDto[] response = this.webClient.get().uri("impor-karyawan-human").retrieve()
+                // KaryawanBaruDto[] response =
+                // this.webClient.get().uri("api/karyawan/list").retrieve()
                 .bodyToMono(KaryawanBaruDto[].class).block();
 
         List<KaryawanBaruDto> query = Arrays.asList(response);
