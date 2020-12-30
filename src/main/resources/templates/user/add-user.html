@@ -18,35 +18,35 @@
                 <form th:action="@{/user/add}" th:object="${pegawai}" method="POST">
                     <div class="form-group">
                         <label>Username</label>
-                        <input type="text" class="form-control" name="username" />
+                        <input type="text" class="form-control" name="username" required/>
                     </div>
                     <div class="form-group">
                         <label>Nama</label>
-                        <input type="text" class="form-control" name="nama" />
+                        <input type="text" class="form-control" name="nama" required/>
                     </div>
                     <div class="form-group">
                         <label>Nomor Telepon</label>
-                        <input type="text" class="form-control" name="noTelepon" />
+                        <input type="text" class="form-control" name="noTelepon" required/>
                     </div>
                     <div class="form-group">
                         <label>Tempat Lahir</label>
-                        <input type="text" class="form-control" name="tempatLahir" />
+                        <input type="text" class="form-control" name="tempatLahir" required/>
                     </div>
                     <div class="form-group">
                         <label>Tanggal Lahir</label>
-                        <input type="datetime-local" class="form-control" name="tanggalLahir" />
+                        <input type="datetime-local" class="form-control" name="tanggalLahir" required/>
                     </div>
                     <div class="form-group">
                         <label>Alamat</label>
-                        <input type="text" class="form-control" name="alamat"/>
+                        <input type="text" class="form-control" name="alamat" required/>
                     </div>
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" name="password" />
+                        <input type="password" class="form-control" name="password" required/>
                     </div>
                     <div class="form-group">
                         <label>Role</label>
-                        <select name="idRole" class="form-control">
+                        <select name="idRole" class="form-control" required>
                             <option selected value="">-- Pilih Role --</option>
                             <option th:each="role : ${listRole}" th:value="${role.id}" th:text="${role.role}"></option>
                         </select>

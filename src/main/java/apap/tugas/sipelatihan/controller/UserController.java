@@ -1,7 +1,6 @@
 package apap.tugas.sipelatihan.controller;
 
 import java.security.Principal;
-import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -9,7 +8,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,17 +64,25 @@ public class UserController {
     }
     
     @PostMapping("/user/add")
-    public String addUserSubmit(@ModelAttribute PegawaiDetail pegawai) {
-        if (userService.getUserByUsername(pegawai.getUsername()) == null) {
-            UserModel user = new UserModel();
-            user.setUsername(pegawai.getUsername());
-            user.setPassword(pegawai.getPassword());
-            user.setRole(roleDb.findById(pegawai.getIdRole()).get());
+    public String addUserSubmit(@ModelAttribute PegawaiDetail pegawai, Model model) {
+        try {
+            if (userService.getUserByUsername(pegawai.getUsername()) == null) {
+                UserModel user = new UserModel();
+                user.setUsername(pegawai.getUsername());
+                user.setPassword(pegawai.getPassword());
+                user.setRole(roleDb.findById(pegawai.getIdRole()).get());
 
-            userRestService.addPegawai(pegawai);
-            userService.addUser(user);
+                userRestService.addPegawai(pegawai);
+                userService.addUser(user);
+            }
+            return "redirect:/login";    
+        } catch (Exception e) {
+            model.addAttribute("listRole", roleService.findAll());
+            // model.addAttribute("user", new UserModel());
+            model.addAttribute("pegawai", new PegawaiDetail());
+            return "user/add-user"; 
         }
-        return "redirect:/login";
+        
     }
 
     @RequestMapping(value = "/user/profil", method = RequestMethod.GET)
