@@ -15,6 +15,9 @@
         <div class="row-cols-1 h-100 mx-auto justify-content-center align-items-center">
             <div th:replace="fragments/div :: headVar(title='Add User', col='6')"></div>
             <div class="col-md-6 col-12 mx-auto p-4 shadow">
+                <div th:if="${msg} != null" class="text-center mb-2 font-weight-bold">
+                    <span class="text-warning" th:text="${msg}"></span>
+                </div>
                 <form th:action="@{/user/add}" th:object="${pegawai}" method="POST">
                     <div class="form-group">
                         <label>Username</label>
