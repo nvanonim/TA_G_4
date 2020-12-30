@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/pelatihan/delete/**").hasAnyAuthority("Staff Training", "Kepala Bagian", "Kepala Departemen HR")
                 .antMatchers("/peserta/add").hasAnyAuthority("Staff Training", "Kepala Bagian")
                 .antMatchers("/pelatihan/*/add/peserta").hasAnyAuthority("Staff Training", "Kepala Bagian")
+                .antMatchers("/peserta/laporan").hasAnyAuthority("Kepala Bagian")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
