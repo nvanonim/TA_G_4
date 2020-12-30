@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,8 @@
             <div class="col-md-11">
                 <br>
                 <br>
-                <a th:href="@{/peserta/add}" class="btn btn-success">+ Tambah Peserta</a>
+                <a  th:href="@{/peserta/add}" class="btn btn-success">+ Tambah Peserta</a>
+                <a th:href="@{/peserta/laporan}" class="btn btn-warning">Membuat Laporan</a>
                 <br><br>
                 <div class="card pilot">
                     <div class="card-header" id="center">
